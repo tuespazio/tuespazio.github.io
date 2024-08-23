@@ -20,20 +20,20 @@ This mostly works if you are on 64bit. You are on your own if you are on 32bit o
 
 Credit to anfractuosity and fgimenezm for figuring out additional details for kernels
 
-# Make sure everything is up-to-date
+## Make sure everything is up-to-date
 
 ```
 sudo apt-get update && sudo apt-get dist-upgrade
 ```
 
-# Point to bookworm repos instead
+## Point to bookworm repos instead
 
 ```
 sudo sed -i -e 's/bullseye/bookworm/g' /etc/apt/sources.list
 sudo sed -i -e 's/bullseye/bookworm/g' /etc/apt/sources.list.d/raspi.list
 ```
 
-# Contents of /etc/apt/sources.list
+## Contents of /etc/apt/sources.list
 
 ```
 deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
@@ -49,41 +49,41 @@ deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free
 #deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free
 ```
 
-# Contents of /etc/apt/sources.list.d/raspi.list
+## Contents of /etc/apt/sources.list.d/raspi.list
 
 ```
 deb http://archive.raspberrypi.org/debian/ bookworm main
 ```
 
-# Uncomment line below then 'apt-get update' to enable 'apt-get source'
+## Uncomment line below then 'apt-get update' to enable 'apt-get source'
 
 ```
 #deb-src http://archive.raspberrypi.org/debian/ bookworm main
 ```
 
-# Do actual update
+## Do actual update
 
 ```
 sudo apt update && sudo apt -y full-upgrade && sudo apt -y clean && sudo apt -y autoremove
 ```
 
-# Reboot
+## Reboot
 
 ```
 sudo reboot
 ```
 
-# Remove old config files after doing sanity checks
+## Remove old config files after doing sanity checks
 
 ```
 sudo apt purge ?config-files
 ```
 
-## Switch to the new kernels
+Switch to the new kernels
 
-## WARNING: Since this has bitten several folks. The following can completely brick your system requiring a reinstall
+WARNING: Since this has bitten several folks. The following can completely brick your system requiring a reinstall
 
-## DO NOT do this if you are unsure
+DO NOT do this if you are unsure
 
 ## Prep
 
@@ -128,11 +128,11 @@ Linux raspberrypi 6.1.21-v8+ #1642 SMP PREEMPT Mon Apr 3 17:24:16 BST 2023 aarch
 Linux raspberrypi 6.1.0-rpi4-rpi-v8 #1 SMP PREEMPT Debian 1:6.1.54-1+rpt2 (2023-10-05) aarch64 GNU/Linux
 ```
 
-## If you are not converted to using NetworkManager, you might lose networking upon reboot.
+If you are not converted to using NetworkManager, you might lose networking upon reboot.
 
-## Check the ARP table to see what the new DHCP assigned IP address is. You may have to manually set the IP address again
+Check the ARP table to see what the new DHCP assigned IP address is. You may have to manually set the IP address again
 
-## Thanks to solsticedhiver for identifying this
+Thanks to solsticedhiver for identifying this
 
 ## Install NetworkManager if not already installed
 
