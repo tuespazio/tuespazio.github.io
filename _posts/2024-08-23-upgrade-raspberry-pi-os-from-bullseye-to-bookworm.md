@@ -10,52 +10,68 @@ tags: \[Upgrade,linux,bookworm,bullseye\] # TAG names should always be lowercase
 
 From: https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8
 
-### WARNING: READ CAREFULLY BEFORE ATTEMPTING
+WARNING: READ CAREFULLY BEFORE ATTEMPTING
 
-## Officially, this is not recommended. YMMV (But tested and work)
+Officially, this is not recommended. YMMV (But tested and work)
 
-## https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/
+https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/
 
-## This mostly works if you are on 64bit. You are on your own if you are on 32bit or mixed 64/32bit
+This mostly works if you are on 64bit. You are on your own if you are on 32bit or mixed 64/32bit
 
-## Credit to anfractuosity and fgimenezm for figuring out additional details for kernels
+Credit to anfractuosity and fgimenezm for figuring out additional details for kernels
 
 # Make sure everything is up-to-date
 
+```
 sudo apt-get update && sudo apt-get dist-upgrade
+```
 
 # Point to bookworm repos instead
 
-sudo sed -i -e 's/bullseye/bookworm/g' /etc/apt/sources.list  
+```
+sudo sed -i -e 's/bullseye/bookworm/g' /etc/apt/sources.list
 sudo sed -i -e 's/bullseye/bookworm/g' /etc/apt/sources.list.d/raspi.list
+```
 
 # Contents of /etc/apt/sources.list
 
-deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware  
-deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware  
+```
+deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
 deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware
+```
 
 ## Uncomment deb-src lines below then 'apt-get update' to enable 'apt-get source'
 
-#deb-src http://deb.debian.org/debian bookworm main contrib non-free  
-#deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free  
+```
+#deb-src http://deb.debian.org/debian bookworm main contrib non-free
+#deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free
 #deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free
+```
 
 # Contents of /etc/apt/sources.list.d/raspi.list
 
+```
 deb http://archive.raspberrypi.org/debian/ bookworm main
+```
 
 # Uncomment line below then 'apt-get update' to enable 'apt-get source'
 
+```
 #deb-src http://archive.raspberrypi.org/debian/ bookworm main
+```
 
 # Do actual update
 
+```
 sudo apt update && sudo apt -y full-upgrade && sudo apt -y clean && sudo apt -y autoremove
+```
 
 # Reboot
 
+```
 sudo reboot
+```
 
 # Remove old config files after doing sanity checks
 
@@ -112,20 +128,20 @@ Linux raspberrypi 6.1.21-v8+ #1642 SMP PREEMPT Mon Apr 3 17:24:16 BST 2023 aarch
 Linux raspberrypi 6.1.0-rpi4-rpi-v8 #1 SMP PREEMPT Debian 1:6.1.54-1+rpt2 (2023-10-05) aarch64 GNU/Linux
 ```
 
-# If you are not converted to using NetworkManager, you might lose networking upon reboot.
+## If you are not converted to using NetworkManager, you might lose networking upon reboot.
 
-# Check the ARP table to see what the new DHCP assigned IP address is. You may have to manually set the IP address again
+## Check the ARP table to see what the new DHCP assigned IP address is. You may have to manually set the IP address again
 
-# Thanks to solsticedhiver for identifying this
+## Thanks to solsticedhiver for identifying this
 
-# Install NetworkManager if not already installed
+## Install NetworkManager if not already installed
 
 ```
 sudo apt-get install --no-install-recommends network-manager
 #
 ```
 
-# Switch to NetworkManager from dhcpcd
+## Switch to NetworkManager from dhcpcd
 
 ```
 sudo systemctl enable --now NetworkManager
@@ -133,7 +149,7 @@ sudo systemctl disable --now dhcpcd
 #
 ```
 
-# Set up static IP. Adjust as necessary
+## Set up static IP. Adjust as necessary
 
 ```
 sudo nmcli -p connection show
@@ -141,13 +157,13 @@ sudo nmcli -p connection show "Wired connection 1"
 sudo nmcli con mod "Wired connection 1" ipv4.method manual ipv4.addresses 192.168.1.5/24 ipv4.gateway 192.168.1.1
 ```
 
-# Reboot
+## Reboot
 
 ```
 sudo reboot
 ```
 
-# Bonus steps
+## Bonus steps
 
 ## Install btop
 
@@ -157,10 +173,14 @@ sudo apt-get install btop
 
 ## Update /etc/ssh/sshd\_config for up to date, secure by default config. Use ssh-audit to verify
 
-KexAlgorithms sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org  
+```
+KexAlgorithms sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org
 HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-ed25519
+```
 
-# Ciphers chacha20-poly1305@openssh.com # Disabled due to CVE-2023-48795 for now
+## Ciphers chacha20-poly1305@openssh.com # Disabled due to CVE-2023-48795 for now
 
-Ciphers aes128-gcm@openssh.com,aes256-gcm@openssh.com  
+```
+Ciphers aes128-gcm@openssh.com,aes256-gcm@openssh.com
 MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
+```
