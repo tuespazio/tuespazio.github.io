@@ -70,5 +70,37 @@
   </url><url>
     <loc>http://localhost:1313/categories/raspberrypi/</loc>
     <lastmod>2024-08-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/manifest.json</loc>
+  </url><url>
+    <loc>http://localhost:1313/search/_index.de/</loc>
+    <priority>0.1</priority>
+  </url><url>
+    <loc>http://localhost:1313/search/</loc>
+    <priority>0.1</priority>
+  </url><url>
+    <loc>http://localhost:1313/search/_index.es/</loc>
+    <priority>0.1</priority>
+  </url><url>
+    <loc>http://localhost:1313/search/_index.fr/</loc>
+    <priority>0.1</priority>
+  </url><url>
+    <loc>http://localhost:1313/search/_index.hi/</loc>
+    <priority>0.1</priority>
+  </url><url>
+    <loc>http://localhost:1313/search/_index.jp/</loc>
+    <priority>0.1</priority>
+  </url><url>
+    <loc>http://localhost:1313/search/_index.nl/</loc>
+    <priority>0.1</priority>
+  </url><url>
+    <loc>http://localhost:1313/search/_index.pl/</loc>
+    <priority>0.1</priority>
+  </url><url>
+    <loc>http://localhost:1313/search/_index.ru/</loc>
+    <priority>0.1</priority>
+  </url><url>
+    <loc>http://localhost:1313/search/_index.zh-cn/</loc>
+    <priority>0.1</priority>
   </url>
 </urlset>
