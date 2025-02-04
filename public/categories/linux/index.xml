@@ -1,29 +1,535 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Linux on </title>
+    <title>Linux on Jack Notes</title>
     <link>http://localhost:1313/categories/linux/</link>
-    <description>Recent content in Linux on </description>
-    <generator>Hugo</generator>
-    <language>en</language>
-    <managingEditor>user@example.com (Hugo Author)</managingEditor>
-    <webMaster>user@example.com (Hugo Author)</webMaster>
-    <copyright>jvergara</copyright>
-    <lastBuildDate>Thu, 22 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <description>Recent content in Linux on Jack Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <managingEditor>me@example.com (jvergara)</managingEditor>
+    <webMaster>me@example.com (jvergara)</webMaster>
+    <copyright>jvergara (CC BY 4.0)</copyright>
+    <lastBuildDate>Fri, 23 Aug 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/categories/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Upgrade Raspberry Pi OS from Bullseye to Bookworm</title>
+      <link>http://localhost:1313/blog/2024-08-23-upgrade-raspberry-pi-os-from-bullseye-to-bookworm/</link>
+      <pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/blog/2024-08-23-upgrade-raspberry-pi-os-from-bullseye-to-bookworm/</guid>
+      <description>&lt;p&gt;From: &lt;a href=&#34;https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8&#34;&gt;https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;WARNING: READ CAREFULLY BEFORE ATTEMPTING&lt;/p&gt;&#xA;&lt;p&gt;Officially, this is not recommended. YMMV (But tested and work)&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/&#34;&gt;https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;This mostly works if you are on 64bit. You are on your own if you are on 32bit or mixed 64/32bit&lt;/p&gt;&#xA;&lt;p&gt;Credit to anfractuosity and fgimenezm for figuring out additional details for kernels&lt;/p&gt;&#xA;&lt;h2 id=&#34;make-sure-everything-is-up-to-date&#34;&gt;Make sure everything is up-to-date&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get dist-upgrade&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;point-to-bookworm-repos-instead&#34;&gt;Point to bookworm repos instead&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo sed -i -e &amp;#39;s/bullseye/bookworm/g&amp;#39; /etc/apt/sources.list&#xA;sudo sed -i -e &amp;#39;s/bullseye/bookworm/g&amp;#39; /etc/apt/sources.list.d/raspi.list&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;contents-of-etcaptsourceslist&#34;&gt;Contents of /etc/apt/sources.list&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware&#xA;deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware&#xA;deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uncomment-deb-src-lines-below-then-apt-get-update-to-enable-apt-get-source&#34;&gt;Uncomment deb-src lines below then &amp;lsquo;apt-get update&amp;rsquo; to enable &amp;lsquo;apt-get source&amp;rsquo;&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#deb-src http://deb.debian.org/debian bookworm main contrib non-free&#xA;#deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free&#xA;#deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;contents-of-etcaptsourceslistdraspilist&#34;&gt;Contents of /etc/apt/sources.list.d/raspi.list&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;deb http://archive.raspberrypi.org/debian/ bookworm main&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uncomment-line-below-then-apt-get-update-to-enable-apt-get-source&#34;&gt;Uncomment line below then &amp;lsquo;apt-get update&amp;rsquo; to enable &amp;lsquo;apt-get source&amp;rsquo;&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#deb-src http://archive.raspberrypi.org/debian/ bookworm main&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;do-actual-update&#34;&gt;Do actual update&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt update &amp;amp;&amp;amp; sudo apt -y full-upgrade &amp;amp;&amp;amp; sudo apt -y clean &amp;amp;&amp;amp; sudo apt -y autoremove&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;reboot&#34;&gt;Reboot&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo reboot&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;remove-old-config-files-after-doing-sanity-checks&#34;&gt;Remove old config files after doing sanity checks&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt purge ?config-files&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Switch to the new kernels&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>From: <a href="https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8">https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8</a></p>
+<p>WARNING: READ CAREFULLY BEFORE ATTEMPTING</p>
+<p>Officially, this is not recommended. YMMV (But tested and work)</p>
+<p><a href="https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/">https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/</a></p>
+<p>This mostly works if you are on 64bit. You are on your own if you are on 32bit or mixed 64/32bit</p>
+<p>Credit to anfractuosity and fgimenezm for figuring out additional details for kernels</p>
+<h2 id="make-sure-everything-is-up-to-date">Make sure everything is up-to-date</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get update &amp;&amp; sudo apt-get dist-upgrade</code></pre><h2 id="point-to-bookworm-repos-instead">Point to bookworm repos instead</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list
+sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list.d/raspi.list</code></pre><h2 id="contents-of-etcaptsourceslist">Contents of /etc/apt/sources.list</h2>
+
+
+
+
+
+<pre tabindex="0"><code>deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware</code></pre><h2 id="uncomment-deb-src-lines-below-then-apt-get-update-to-enable-apt-get-source">Uncomment deb-src lines below then &lsquo;apt-get update&rsquo; to enable &lsquo;apt-get source&rsquo;</h2>
+
+
+
+
+
+<pre tabindex="0"><code>#deb-src http://deb.debian.org/debian bookworm main contrib non-free
+#deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free
+#deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free</code></pre><h2 id="contents-of-etcaptsourceslistdraspilist">Contents of /etc/apt/sources.list.d/raspi.list</h2>
+
+
+
+
+
+<pre tabindex="0"><code>deb http://archive.raspberrypi.org/debian/ bookworm main</code></pre><h2 id="uncomment-line-below-then-apt-get-update-to-enable-apt-get-source">Uncomment line below then &lsquo;apt-get update&rsquo; to enable &lsquo;apt-get source&rsquo;</h2>
+
+
+
+
+
+<pre tabindex="0"><code>#deb-src http://archive.raspberrypi.org/debian/ bookworm main</code></pre><h2 id="do-actual-update">Do actual update</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt update &amp;&amp; sudo apt -y full-upgrade &amp;&amp; sudo apt -y clean &amp;&amp; sudo apt -y autoremove</code></pre><h2 id="reboot">Reboot</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo reboot</code></pre><h2 id="remove-old-config-files-after-doing-sanity-checks">Remove old config files after doing sanity checks</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt purge ?config-files</code></pre><p>Switch to the new kernels</p>
+<p>WARNING: Since this has bitten several folks. The following can completely brick your system requiring a reinstall</p>
+<p>DO NOT do this if you are unsure</p>
+<h2 id="prep">Prep</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo dpkg --purge --force-depends raspberrypi-kernel raspberrypi-bootloader
+sudo umount /boot
+sudo fsck -y /boot
+sudo mkdir /boot/firmware
+sudo sed -i.bak -e &#34;s#boot#boot/firmware#&#34; /etc/fstab
+sudo systemctl daemon-reload
+sudo mount /boot/firmware
+sudo apt install raspi-firmware</code></pre><h2 id="actually-install-the-kernels-make-sure-you-pick-the-right-version-for-your-pi">Actually install the kernels. Make sure you pick the right version for your Pi</h2>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v8</span> <span class="n">linux</span><span class="o">-</span><span class="n">headers</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v8</span> <span class="c1"># 64bit</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v7l</span> <span class="n">linux</span><span class="o">-</span><span class="n">headers</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v7l</span> <span class="c1"># 32bit</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v6</span> <span class="n">linux</span><span class="o">-</span><span class="n">headers</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v6</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="no">Append</span> <span class="n">auto_initramfs</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="n">the</span> <span class="n">bottom</span> <span class="n">of</span> <span class="n">file</span> <span class="n">where</span> <span class="n">it</span> <span class="n">says</span> <span class="o">[</span><span class="n">all</span><span class="o">]</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="n">sudo</span> <span class="n">sed</span> <span class="o">-</span><span class="n">i</span><span class="o">.</span><span class="n">bak</span> <span class="s1">&#39;$ a\auto_initramfs=1&#39;</span> <span class="sr">/boot/</span><span class="n">firmware</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">txt</span></span></span></code></pre></div><h2 id="reboot-1">Reboot</h2>
+<p>sudo reboot</p>
+
+
+
+
+
+<pre tabindex="0"><code>Verify using &#34;uname -a&#34; (correct as of 10/2023)</code></pre><h1 id="old-kernel">Old kernel</h1>
+
+
+
+
+
+<pre tabindex="0"><code>Linux raspberrypi 6.1.21-v8+ #1642 SMP PREEMPT Mon Apr 3 17:24:16 BST 2023 aarch64 GNU/Linux</code></pre><h1 id="new-kernel">New kernel</h1>
+
+
+
+
+
+<pre tabindex="0"><code>Linux raspberrypi 6.1.0-rpi4-rpi-v8 #1 SMP PREEMPT Debian 1:6.1.54-1+rpt2 (2023-10-05) aarch64 GNU/Linux</code></pre><p>If you are not converted to using NetworkManager, you might lose networking upon reboot.</p>
+<p>Check the ARP table to see what the new DHCP assigned IP address is. You may have to manually set the IP address again</p>
+<p>Thanks to solsticedhiver for identifying this</p>
+<h2 id="install-networkmanager-if-not-already-installed">Install NetworkManager if not already installed</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install --no-install-recommends network-manager
+#</code></pre><h2 id="switch-to-networkmanager-from-dhcpcd">Switch to NetworkManager from dhcpcd</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo systemctl enable --now NetworkManager
+sudo systemctl disable --now dhcpcd
+#</code></pre><h2 id="set-up-static-ip-adjust-as-necessary">Set up static IP. Adjust as necessary</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo nmcli -p connection show
+sudo nmcli -p connection show &#34;Wired connection 1&#34;
+sudo nmcli con mod &#34;Wired connection 1&#34; ipv4.method manual ipv4.addresses 192.168.1.5/24 ipv4.gateway 192.168.1.1</code></pre><h2 id="reboot-2">Reboot</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo reboot</code></pre><h2 id="bonus-steps">Bonus steps</h2>
+<h2 id="install-btop">Install btop</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install btop</code></pre><h2 id="update-etcsshsshd_config-for-up-to-date-secure-by-default-config-use-ssh-audit-to-verify">Update /etc/ssh/sshd_config for up to date, secure by default config. Use ssh-audit to verify</h2>
+
+
+
+
+
+<pre tabindex="0"><code>KexAlgorithms sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org
+HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-ed25519</code></pre><h2 id="ciphers-chacha20-poly1305opensshcom--disabled-due-to-cve-2023-48795-for-now">Ciphers <a href="mailto:chacha20-poly1305@openssh.com">chacha20-poly1305@openssh.com</a> # Disabled due to CVE-2023-48795 for now</h2>
+
+
+
+
+
+<pre tabindex="0"><code>Ciphers aes128-gcm@openssh.com,aes256-gcm@openssh.com
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com</code></pre>]]></content:encoded>
+    </item>
+    <item>
+      <title>Upgrade Raspberry Pi OS from Bullseye to Bookworm</title>
+      <link>http://localhost:1313/post/2024-08-23-upgrade-raspberry-pi-os-from-bullseye-to-bookworm/</link>
+      <pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/post/2024-08-23-upgrade-raspberry-pi-os-from-bullseye-to-bookworm/</guid>
+      <description>&lt;p&gt;From: &lt;a href=&#34;https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8&#34;&gt;https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;WARNING: READ CAREFULLY BEFORE ATTEMPTING&lt;/p&gt;&#xA;&lt;p&gt;Officially, this is not recommended. YMMV (But tested and work)&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/&#34;&gt;https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;This mostly works if you are on 64bit. You are on your own if you are on 32bit or mixed 64/32bit&lt;/p&gt;&#xA;&lt;p&gt;Credit to anfractuosity and fgimenezm for figuring out additional details for kernels&lt;/p&gt;&#xA;&lt;h2 id=&#34;make-sure-everything-is-up-to-date&#34;&gt;Make sure everything is up-to-date&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get dist-upgrade&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;point-to-bookworm-repos-instead&#34;&gt;Point to bookworm repos instead&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo sed -i -e &amp;#39;s/bullseye/bookworm/g&amp;#39; /etc/apt/sources.list&#xA;sudo sed -i -e &amp;#39;s/bullseye/bookworm/g&amp;#39; /etc/apt/sources.list.d/raspi.list&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;contents-of-etcaptsourceslist&#34;&gt;Contents of /etc/apt/sources.list&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware&#xA;deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware&#xA;deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uncomment-deb-src-lines-below-then-apt-get-update-to-enable-apt-get-source&#34;&gt;Uncomment deb-src lines below then &amp;lsquo;apt-get update&amp;rsquo; to enable &amp;lsquo;apt-get source&amp;rsquo;&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#deb-src http://deb.debian.org/debian bookworm main contrib non-free&#xA;#deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free&#xA;#deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;contents-of-etcaptsourceslistdraspilist&#34;&gt;Contents of /etc/apt/sources.list.d/raspi.list&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;deb http://archive.raspberrypi.org/debian/ bookworm main&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uncomment-line-below-then-apt-get-update-to-enable-apt-get-source&#34;&gt;Uncomment line below then &amp;lsquo;apt-get update&amp;rsquo; to enable &amp;lsquo;apt-get source&amp;rsquo;&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#deb-src http://archive.raspberrypi.org/debian/ bookworm main&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;do-actual-update&#34;&gt;Do actual update&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt update &amp;amp;&amp;amp; sudo apt -y full-upgrade &amp;amp;&amp;amp; sudo apt -y clean &amp;amp;&amp;amp; sudo apt -y autoremove&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;reboot&#34;&gt;Reboot&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo reboot&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;remove-old-config-files-after-doing-sanity-checks&#34;&gt;Remove old config files after doing sanity checks&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt purge ?config-files&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Switch to the new kernels&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>From: <a href="https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8">https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8</a></p>
+<p>WARNING: READ CAREFULLY BEFORE ATTEMPTING</p>
+<p>Officially, this is not recommended. YMMV (But tested and work)</p>
+<p><a href="https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/">https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/</a></p>
+<p>This mostly works if you are on 64bit. You are on your own if you are on 32bit or mixed 64/32bit</p>
+<p>Credit to anfractuosity and fgimenezm for figuring out additional details for kernels</p>
+<h2 id="make-sure-everything-is-up-to-date">Make sure everything is up-to-date</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get update &amp;&amp; sudo apt-get dist-upgrade</code></pre><h2 id="point-to-bookworm-repos-instead">Point to bookworm repos instead</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list
+sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list.d/raspi.list</code></pre><h2 id="contents-of-etcaptsourceslist">Contents of /etc/apt/sources.list</h2>
+
+
+
+
+
+<pre tabindex="0"><code>deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware</code></pre><h2 id="uncomment-deb-src-lines-below-then-apt-get-update-to-enable-apt-get-source">Uncomment deb-src lines below then &lsquo;apt-get update&rsquo; to enable &lsquo;apt-get source&rsquo;</h2>
+
+
+
+
+
+<pre tabindex="0"><code>#deb-src http://deb.debian.org/debian bookworm main contrib non-free
+#deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free
+#deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free</code></pre><h2 id="contents-of-etcaptsourceslistdraspilist">Contents of /etc/apt/sources.list.d/raspi.list</h2>
+
+
+
+
+
+<pre tabindex="0"><code>deb http://archive.raspberrypi.org/debian/ bookworm main</code></pre><h2 id="uncomment-line-below-then-apt-get-update-to-enable-apt-get-source">Uncomment line below then &lsquo;apt-get update&rsquo; to enable &lsquo;apt-get source&rsquo;</h2>
+
+
+
+
+
+<pre tabindex="0"><code>#deb-src http://archive.raspberrypi.org/debian/ bookworm main</code></pre><h2 id="do-actual-update">Do actual update</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt update &amp;&amp; sudo apt -y full-upgrade &amp;&amp; sudo apt -y clean &amp;&amp; sudo apt -y autoremove</code></pre><h2 id="reboot">Reboot</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo reboot</code></pre><h2 id="remove-old-config-files-after-doing-sanity-checks">Remove old config files after doing sanity checks</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt purge ?config-files</code></pre><p>Switch to the new kernels</p>
+<p>WARNING: Since this has bitten several folks. The following can completely brick your system requiring a reinstall</p>
+<p>DO NOT do this if you are unsure</p>
+<h2 id="prep">Prep</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo dpkg --purge --force-depends raspberrypi-kernel raspberrypi-bootloader
+sudo umount /boot
+sudo fsck -y /boot
+sudo mkdir /boot/firmware
+sudo sed -i.bak -e &#34;s#boot#boot/firmware#&#34; /etc/fstab
+sudo systemctl daemon-reload
+sudo mount /boot/firmware
+sudo apt install raspi-firmware</code></pre><h2 id="actually-install-the-kernels-make-sure-you-pick-the-right-version-for-your-pi">Actually install the kernels. Make sure you pick the right version for your Pi</h2>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v8</span> <span class="n">linux</span><span class="o">-</span><span class="n">headers</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v8</span> <span class="c1"># 64bit</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v7l</span> <span class="n">linux</span><span class="o">-</span><span class="n">headers</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v7l</span> <span class="c1"># 32bit</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v6</span> <span class="n">linux</span><span class="o">-</span><span class="n">headers</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v6</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="no">Append</span> <span class="n">auto_initramfs</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="n">the</span> <span class="n">bottom</span> <span class="n">of</span> <span class="n">file</span> <span class="n">where</span> <span class="n">it</span> <span class="n">says</span> <span class="o">[</span><span class="n">all</span><span class="o">]</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="n">sudo</span> <span class="n">sed</span> <span class="o">-</span><span class="n">i</span><span class="o">.</span><span class="n">bak</span> <span class="s1">&#39;$ a\auto_initramfs=1&#39;</span> <span class="sr">/boot/</span><span class="n">firmware</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">txt</span></span></span></code></pre></div><h2 id="reboot-1">Reboot</h2>
+<p>sudo reboot</p>
+
+
+
+
+
+<pre tabindex="0"><code>Verify using &#34;uname -a&#34; (correct as of 10/2023)</code></pre><h1 id="old-kernel">Old kernel</h1>
+
+
+
+
+
+<pre tabindex="0"><code>Linux raspberrypi 6.1.21-v8+ #1642 SMP PREEMPT Mon Apr 3 17:24:16 BST 2023 aarch64 GNU/Linux</code></pre><h1 id="new-kernel">New kernel</h1>
+
+
+
+
+
+<pre tabindex="0"><code>Linux raspberrypi 6.1.0-rpi4-rpi-v8 #1 SMP PREEMPT Debian 1:6.1.54-1+rpt2 (2023-10-05) aarch64 GNU/Linux</code></pre><p>If you are not converted to using NetworkManager, you might lose networking upon reboot.</p>
+<p>Check the ARP table to see what the new DHCP assigned IP address is. You may have to manually set the IP address again</p>
+<p>Thanks to solsticedhiver for identifying this</p>
+<h2 id="install-networkmanager-if-not-already-installed">Install NetworkManager if not already installed</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install --no-install-recommends network-manager
+#</code></pre><h2 id="switch-to-networkmanager-from-dhcpcd">Switch to NetworkManager from dhcpcd</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo systemctl enable --now NetworkManager
+sudo systemctl disable --now dhcpcd
+#</code></pre><h2 id="set-up-static-ip-adjust-as-necessary">Set up static IP. Adjust as necessary</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo nmcli -p connection show
+sudo nmcli -p connection show &#34;Wired connection 1&#34;
+sudo nmcli con mod &#34;Wired connection 1&#34; ipv4.method manual ipv4.addresses 192.168.1.5/24 ipv4.gateway 192.168.1.1</code></pre><h2 id="reboot-2">Reboot</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo reboot</code></pre><h2 id="bonus-steps">Bonus steps</h2>
+<h2 id="install-btop">Install btop</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install btop</code></pre><h2 id="update-etcsshsshd_config-for-up-to-date-secure-by-default-config-use-ssh-audit-to-verify">Update /etc/ssh/sshd_config for up to date, secure by default config. Use ssh-audit to verify</h2>
+
+
+
+
+
+<pre tabindex="0"><code>KexAlgorithms sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org
+HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-ed25519</code></pre><h2 id="ciphers-chacha20-poly1305opensshcom--disabled-due-to-cve-2023-48795-for-now">Ciphers <a href="mailto:chacha20-poly1305@openssh.com">chacha20-poly1305@openssh.com</a> # Disabled due to CVE-2023-48795 for now</h2>
+
+
+
+
+
+<pre tabindex="0"><code>Ciphers aes128-gcm@openssh.com,aes256-gcm@openssh.com
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com</code></pre>]]></content:encoded>
+    </item>
+    <item>
+      <title>Airprint RaspberryPi OS</title>
+      <link>http://localhost:1313/blog/2024-08-22-airprint-raspberrypi-os/</link>
+      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/blog/2024-08-22-airprint-raspberrypi-os/</guid>
+      <description>&lt;p&gt;Para habilitar AirPrint en CUPS (Common UNIX Printing System), sigue estos pasos:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Asegúrate de que CUPS esté instalado y funcionando en tu sistema.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Instala Avahi, que es necesario para el descubrimiento de servicios:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install avahi-daemon&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Instala los paquetes necesarios para AirPrint:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install cups-filters&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Edita el archivo de configuración de CUPS:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo nano /etc/cups/cupsd.conf&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;En el archivo, busca la sección &amp;ldquo;Browsing&amp;rdquo; y asegúrate de que tenga estas líneas:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Browsing On&#xA;BrowseLocalProtocols dnssd&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;En la misma sección, agrega o modifica estas líneas:&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Para habilitar AirPrint en CUPS (Common UNIX Printing System), sigue estos pasos:</p>
+<ol>
+<li>
+<p>Asegúrate de que CUPS esté instalado y funcionando en tu sistema.</p>
+</li>
+<li>
+<p>Instala Avahi, que es necesario para el descubrimiento de servicios:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install avahi-daemon</code></pre></li>
+<li>
+<p>Instala los paquetes necesarios para AirPrint:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install cups-filters</code></pre></li>
+<li>
+<p>Edita el archivo de configuración de CUPS:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo nano /etc/cups/cupsd.conf</code></pre></li>
+<li>
+<p>En el archivo, busca la sección &ldquo;Browsing&rdquo; y asegúrate de que tenga estas líneas:</p>
+
+
+
+
+
+<pre tabindex="0"><code>Browsing On
+BrowseLocalProtocols dnssd</code></pre></li>
+<li>
+<p>En la misma sección, agrega o modifica estas líneas:</p>
+
+
+
+
+
+<pre tabindex="0"><code>ServerAlias *</code></pre></li>
+<li>
+<p>Guarda los cambios y cierra el editor.</p>
+</li>
+<li>
+<p>Reinicia el servicio CUPS:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo systemctl restart cups</code></pre></li>
+<li>
+<p>Asegúrate de que tu impresora esté configurada correctamente en CUPS.</p>
+</li>
+<li>
+<p>Verifica que tu dispositivo iOS y tu servidor CUPS estén en la misma red.</p>
+</li>
+</ol>
+<p>Después de seguir estos pasos, tus impresoras configuradas en CUPS deberían ser detectables por dispositivos iOS a través de AirPrint.</p>
+]]></content:encoded>
+    </item>
     <item>
       <title>Airprint RaspberryPi OS</title>
       <link>http://localhost:1313/post/2024-08-22-airprint-raspberrypi-os/</link>
-      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>user@example.com (Hugo Author)</author>
+      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
       <guid>http://localhost:1313/post/2024-08-22-airprint-raspberrypi-os/</guid>
-      <description>&lt;p&gt;Para habilitar AirPrint en CUPS (Common UNIX Printing System), sigue estos pasos:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Asegúrate de que CUPS esté instalado y funcionando en tu sistema.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Instala Avahi, que es necesario para el descubrimiento de servicios:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install avahi-daemon&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Instala los paquetes necesarios para AirPrint:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install cups-filters&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Edita el archivo de configuración de CUPS:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo nano /etc/cups/cupsd.conf&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;En el archivo, busca la sección &amp;ldquo;Browsing&amp;rdquo; y asegúrate de que tenga estas líneas:&lt;/p&gt;</description>
+      <description>&lt;p&gt;Para habilitar AirPrint en CUPS (Common UNIX Printing System), sigue estos pasos:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Asegúrate de que CUPS esté instalado y funcionando en tu sistema.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Instala Avahi, que es necesario para el descubrimiento de servicios:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install avahi-daemon&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Instala los paquetes necesarios para AirPrint:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install cups-filters&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Edita el archivo de configuración de CUPS:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo nano /etc/cups/cupsd.conf&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;En el archivo, busca la sección &amp;ldquo;Browsing&amp;rdquo; y asegúrate de que tenga estas líneas:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Browsing On&#xA;BrowseLocalProtocols dnssd&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;En la misma sección, agrega o modifica estas líneas:&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Para habilitar AirPrint en CUPS (Common UNIX Printing System), sigue estos pasos:</p>
+<ol>
+<li>
+<p>Asegúrate de que CUPS esté instalado y funcionando en tu sistema.</p>
+</li>
+<li>
+<p>Instala Avahi, que es necesario para el descubrimiento de servicios:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install avahi-daemon</code></pre></li>
+<li>
+<p>Instala los paquetes necesarios para AirPrint:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install cups-filters</code></pre></li>
+<li>
+<p>Edita el archivo de configuración de CUPS:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo nano /etc/cups/cupsd.conf</code></pre></li>
+<li>
+<p>En el archivo, busca la sección &ldquo;Browsing&rdquo; y asegúrate de que tenga estas líneas:</p>
+
+
+
+
+
+<pre tabindex="0"><code>Browsing On
+BrowseLocalProtocols dnssd</code></pre></li>
+<li>
+<p>En la misma sección, agrega o modifica estas líneas:</p>
+
+
+
+
+
+<pre tabindex="0"><code>ServerAlias *</code></pre></li>
+<li>
+<p>Guarda los cambios y cierra el editor.</p>
+</li>
+<li>
+<p>Reinicia el servicio CUPS:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo systemctl restart cups</code></pre></li>
+<li>
+<p>Asegúrate de que tu impresora esté configurada correctamente en CUPS.</p>
+</li>
+<li>
+<p>Verifica que tu dispositivo iOS y tu servidor CUPS estén en la misma red.</p>
+</li>
+</ol>
+<p>Después de seguir estos pasos, tus impresoras configuradas en CUPS deberían ser detectables por dispositivos iOS a través de AirPrint.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Enable Quotas AlmaLinux 9 Directadmin</title>
+      <link>http://localhost:1313/blog/2024-08-22-my-new-post/</link>
+      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/blog/2024-08-22-my-new-post/</guid>
+      <description>&lt;p&gt;Please try running this command:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;grubby --args=&amp;#34;rootflags=uquota,pquota&amp;#34; --update-kernel=ALL&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then reboot your server.&#xA;After that check if the XFS quota is OK.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Please try running this command:</p>
+
+
+
+
+
+<pre tabindex="0"><code>grubby --args=&#34;rootflags=uquota,pquota&#34; --update-kernel=ALL</code></pre><p>and then reboot your server.
+After that check if the XFS quota is OK.</p>
+]]></content:encoded>
     </item>
     <item>
       <title>Enable Quotas AlmaLinux 9 Directadmin</title>
       <link>http://localhost:1313/post/2024-08-22-my-new-post/</link>
-      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>user@example.com (Hugo Author)</author>
+      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
       <guid>http://localhost:1313/post/2024-08-22-my-new-post/</guid>
-      <description>&lt;p&gt;Please try running this command:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;grubby --args=&amp;#34;rootflags=uquota,pquota&amp;#34; --update-kernel=ALL&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then reboot your server.&#xA;After that check if the XFS quota is OK.&lt;/p&gt;</description>
+      <description>&lt;p&gt;Please try running this command:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;grubby --args=&amp;#34;rootflags=uquota,pquota&amp;#34; --update-kernel=ALL&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then reboot your server.&#xA;After that check if the XFS quota is OK.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Please try running this command:</p>
+
+
+
+
+
+<pre tabindex="0"><code>grubby --args=&#34;rootflags=uquota,pquota&#34; --update-kernel=ALL</code></pre><p>and then reboot your server.
+After that check if the XFS quota is OK.</p>
+]]></content:encoded>
     </item>
   </channel>
 </rss>

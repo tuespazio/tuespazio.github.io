@@ -26,15 +26,15 @@ enableRobotsTXT = true
 # see https://gohugo.io/content-management/multilingual/
 [languages]
   [languages.en]
-    title = "Bear Cub"
+    title = "Jack Notes"
     languageName = "en-US 🇺🇸"
     LanguageCode = "en-US"
     contentDir = "content"
     [languages.en.params]
       madeWith = "Made with [Bear Cub](https://github.com/clente/hugo-bearcub)"
-  [languages.pt]
-    title = "Bear Cub"
-    languageName = "es-MX 🇧🇷"
+  [languages.es]
+    title = "Jack Note"
+    languageName = "es-MX 🇲🇽"
     LanguageCode = "es-MX"
     contentDir = "content.es"
     [languages.es.params]

@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Airprint on Jack Note</title>
+    <link>http://localhost:1313/pt/tags/airprint/</link>
+    <description>Recent content in Airprint on Jack Note</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es-MX</language>
+    <managingEditor>me@example.com (jvergara)</managingEditor>
+    <webMaster>me@example.com (jvergara)</webMaster>
+    <copyright>jvergara (CC BY 4.0)</copyright>
+    <lastBuildDate>Thu, 22 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/pt/tags/airprint/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Airprint RaspberryPi OS</title>
+      <link>http://localhost:1313/pt/blog/2024-08-22-airprint-raspberrypi-os/</link>
+      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/pt/blog/2024-08-22-airprint-raspberrypi-os/</guid>
+      <description>&lt;p&gt;Para habilitar AirPrint en CUPS (Common UNIX Printing System), sigue estos pasos:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Asegúrate de que CUPS esté instalado y funcionando en tu sistema.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Instala Avahi, que es necesario para el descubrimiento de servicios:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install avahi-daemon&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Instala los paquetes necesarios para AirPrint:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install cups-filters&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Edita el archivo de configuración de CUPS:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo nano /etc/cups/cupsd.conf&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;En el archivo, busca la sección &amp;ldquo;Browsing&amp;rdquo; y asegúrate de que tenga estas líneas:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Browsing On&#xA;BrowseLocalProtocols dnssd&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;En la misma sección, agrega o modifica estas líneas:&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Para habilitar AirPrint en CUPS (Common UNIX Printing System), sigue estos pasos:</p>
+<ol>
+<li>
+<p>Asegúrate de que CUPS esté instalado y funcionando en tu sistema.</p>
+</li>
+<li>
+<p>Instala Avahi, que es necesario para el descubrimiento de servicios:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install avahi-daemon</code></pre></li>
+<li>
+<p>Instala los paquetes necesarios para AirPrint:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install cups-filters</code></pre></li>
+<li>
+<p>Edita el archivo de configuración de CUPS:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo nano /etc/cups/cupsd.conf</code></pre></li>
+<li>
+<p>En el archivo, busca la sección &ldquo;Browsing&rdquo; y asegúrate de que tenga estas líneas:</p>
+
+
+
+
+
+<pre tabindex="0"><code>Browsing On
+BrowseLocalProtocols dnssd</code></pre></li>
+<li>
+<p>En la misma sección, agrega o modifica estas líneas:</p>
+
+
+
+
+
+<pre tabindex="0"><code>ServerAlias *</code></pre></li>
+<li>
+<p>Guarda los cambios y cierra el editor.</p>
+</li>
+<li>
+<p>Reinicia el servicio CUPS:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo systemctl restart cups</code></pre></li>
+<li>
+<p>Asegúrate de que tu impresora esté configurada correctamente en CUPS.</p>
+</li>
+<li>
+<p>Verifica que tu dispositivo iOS y tu servidor CUPS estén en la misma red.</p>
+</li>
+</ol>
+<p>Después de seguir estos pasos, tus impresoras configuradas en CUPS deberían ser detectables por dispositivos iOS a través de AirPrint.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Airprint RaspberryPi OS</title>
+      <link>http://localhost:1313/pt/post/2024-08-22-airprint-raspberrypi-os/</link>
+      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/pt/post/2024-08-22-airprint-raspberrypi-os/</guid>
+      <description>&lt;p&gt;Para habilitar AirPrint en CUPS (Common UNIX Printing System), sigue estos pasos:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Asegúrate de que CUPS esté instalado y funcionando en tu sistema.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Instala Avahi, que es necesario para el descubrimiento de servicios:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install avahi-daemon&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Instala los paquetes necesarios para AirPrint:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install cups-filters&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Edita el archivo de configuración de CUPS:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo nano /etc/cups/cupsd.conf&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;En el archivo, busca la sección &amp;ldquo;Browsing&amp;rdquo; y asegúrate de que tenga estas líneas:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Browsing On&#xA;BrowseLocalProtocols dnssd&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;En la misma sección, agrega o modifica estas líneas:&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Para habilitar AirPrint en CUPS (Common UNIX Printing System), sigue estos pasos:</p>
+<ol>
+<li>
+<p>Asegúrate de que CUPS esté instalado y funcionando en tu sistema.</p>
+</li>
+<li>
+<p>Instala Avahi, que es necesario para el descubrimiento de servicios:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install avahi-daemon</code></pre></li>
+<li>
+<p>Instala los paquetes necesarios para AirPrint:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install cups-filters</code></pre></li>
+<li>
+<p>Edita el archivo de configuración de CUPS:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo nano /etc/cups/cupsd.conf</code></pre></li>
+<li>
+<p>En el archivo, busca la sección &ldquo;Browsing&rdquo; y asegúrate de que tenga estas líneas:</p>
+
+
+
+
+
+<pre tabindex="0"><code>Browsing On
+BrowseLocalProtocols dnssd</code></pre></li>
+<li>
+<p>En la misma sección, agrega o modifica estas líneas:</p>
+
+
+
+
+
+<pre tabindex="0"><code>ServerAlias *</code></pre></li>
+<li>
+<p>Guarda los cambios y cierra el editor.</p>
+</li>
+<li>
+<p>Reinicia el servicio CUPS:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo systemctl restart cups</code></pre></li>
+<li>
+<p>Asegúrate de que tu impresora esté configurada correctamente en CUPS.</p>
+</li>
+<li>
+<p>Verifica que tu dispositivo iOS y tu servidor CUPS estén en la misma red.</p>
+</li>
+</ol>
+<p>Después de seguir estos pasos, tus impresoras configuradas en CUPS deberían ser detectables por dispositivos iOS a través de AirPrint.</p>
+]]></content:encoded>
+    </item>
+  </channel>
+</rss>

@@ -1,45 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en-US">
+
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <title>Enabling DMarc on Directadmin ::  - Example site for hugo-theme-tailwind</title>
-  
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta
-  name="description"
-  content="Adding a DMARC record
-DMARC is a system that adds some rules for DKIM and SPF to give remote servers a better idea of what your intention is for messages that fail those 2 systems. It doesn&rsquo;t really do anything other than clarifying the desired actions to be taken by remote servers, but should lower your spam score in some cases. Be sure that your SPF TXT value contains &ldquo;-all&rdquo; (not ~all) and that you have DKIM setup before proceeding.
-"
-/>
-<meta
-  name="keywords"
-  content="hugo, tailwind, tailwindcss, hugo theme, hugo theme tailwind"
-/>
-<meta name="robots" content="noodp" /><link rel="manifest" href="/manifest.json" /><meta property="og:url" content="http://localhost:1313/post/2024-08-27-enabling-dmarc-on-directadmin/">
-  <meta property="og:title" content="Enabling DMarc on Directadmin">
-  <meta property="og:description" content="Adding a DMARC record
-DMARC is a system that adds some rules for DKIM and SPF to give remote servers a better idea of what your intention is for messages that fail those 2 systems. It doesn’t really do anything other than clarifying the desired actions to be taken by remote servers, but should lower your spam score in some cases. Be sure that your SPF TXT value contains “-all” (not ~all) and that you have DKIM setup before proceeding.">
-  <meta property="og:locale" content="en">
-  <meta property="og:type" content="article">
-    <meta property="article:section" content="post">
-    <meta property="article:published_time" content="2024-08-27T00:00:00+00:00">
-    <meta property="article:modified_time" content="2024-08-27T00:00:00+00:00">
-    <meta property="article:tag" content="\[Directadmin,linux\]">
-
-
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Enabling DMarc on Directadmin">
-  <meta name="twitter:description" content="Adding a DMARC record
-DMARC is a system that adds some rules for DKIM and SPF to give remote servers a better idea of what your intention is for messages that fail those 2 systems. It doesn’t really do anything other than clarifying the desired actions to be taken by remote servers, but should lower your spam score in some cases. Be sure that your SPF TXT value contains “-all” (not ~all) and that you have DKIM setup before proceeding.">
-
-
-<link rel="canonical" href="http://localhost:1313/post/2024-08-27-enabling-dmarc-on-directadmin/" />
-
-<link rel="shortcut icon" href="/favicon.ico" />
-<link rel="stylesheet" href="/css/index.4e7ea2ea87d6a8180ff0db37f7c8331f143bfa624c85c5afbec443f6ee1afe62.css">
-
-
-
+  <meta http-equiv="X-Clacks-Overhead" content="GNU Terry Pratchett" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="shortcut icon" href="http://localhost:1313/images/favicon.png" />
+<title>Enabling DMarc on Directadmin | Jack Notes</title>
+<meta name="title" content="Enabling DMarc on Directadmin" />
+<meta name="description" content="Enabling DMarc on Directadmin" />
+<meta name="author" content="jvergara" />
+<meta name="keywords" content="directadmin,linux," />
 
 
 
@@ -47,319 +18,162 @@ DMARC is a system that adds some rules for DKIM and SPF to give remote servers a
 
 
   
+
+
+
+
+
   
 
+
+
+
+
+
+
+
+
+
+
+
+
+<meta property="og:title" content="Enabling DMarc on Directadmin" />
+<meta property="og:description" content="Enabling DMarc on Directadmin" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/post/2024-08-27-enabling-dmarc-on-directadmin/" />
+
+<meta property="og:image" content="http://localhost:1313/images/social_card_bg_hu_320ca873b99b502e.webp"/><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2024-08-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2024-08-27T00:00:00+00:00" /><meta property="og:site_name" content="Jacks Notes" />
+<meta property="fb:admins" content="0000000000" />
+
+
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="http://localhost:1313/images/social_card_bg_hu_320ca873b99b502e.webp"/>
+<meta name="twitter:title" content="Enabling DMarc on Directadmin"/>
+<meta name="twitter:description" content="Enabling DMarc on Directadmin"/>
+<meta name="twitter:site" content="@example"/>
+
+
+
+<meta itemprop="name" content="Enabling DMarc on Directadmin">
+<meta itemprop="description" content="Enabling DMarc on Directadmin"><meta itemprop="datePublished" content="2024-08-27T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2024-08-27T00:00:00+00:00" />
+<meta itemprop="wordCount" content="362">
+
+<meta itemprop="image" content="http://localhost:1313/images/social_card_bg_hu_320ca873b99b502e.webp"/>
+
+
+<meta itemprop="keywords" content="directadmin,linux," />
+
+<meta name="referrer" content="no-referrer-when-downgrade" />
+
+  
+  <link href="/original.min.css" rel="stylesheet">
+
+  
+    
+    <link href="/syntax.min.css" rel="stylesheet">
+  
+
+  
+
+  
 </head>
-<body class="flex flex-col min-h-screen w-full bg-slate-50 dark:bg-gray-800">
-    
-<div class="fixed right-0 top-0 z-50 flex items-center justify-center bg-gray-200 p-2 text-sm uppercase text-black sm:bg-red-200 md:bg-yellow-200 lg:bg-green-200 xl:bg-blue-200 2xl:bg-pink-200">
-  <span class="block sm:hidden">all</span>
-  <span class="hidden sm:block md:hidden">sm</span>
-  <span class="hidden md:block lg:hidden">md</span>
-  <span class="hidden lg:block xl:hidden">lg</span>
-  <span class="hidden xl:block 2xl:hidden">xl</span>
-  <span class="hidden 2xl:block">2xl</span>
-</div>
 
-  <header class="flex flex-none justify-center z-10">
-    <div class="flex flex-row gap justify-between w-full max-w-4xl lg:max-w-5xl h-12 mt-3">
-  <div class="flex-none ml-2 md:ml-0">
-    <a href="/" class="">
-      <img class="h-12 w-12 rounded-full object-cover bg-gray-100" src="/logo.webp" alt="logo">
-    </a>
-  </div>
-  <div class="flex-1"></div>
-  <div class="flex-none">
-    
+<body>
+  <header><a class="skip-link" href="#main-content">Skip to main content</a>
+
+<a href="/" class="title"><h1>Jack Notes</h1></a>
+<nav>
+  <a href="/">Home</a>
+
+  <a href="/blog/">Blog</a>
+
+<a href='http://localhost:1313/index.xml'>RSS</a>
 
 
 
-<nav class="h-full static">
-  <button id="navbar-menu-toggle" type="button" class="inline-flex items-center p-2 text-sm text-slate-800 dark:text-slate-200 rounded-lg md:hidden" aria-controls="navbar-menu" aria-expanded="false">
-    <span class="sr-only">Open main menu</span>
-    <i class="w-8 h-8">
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M4 6l16 0" />
-  <path d="M4 12l16 0" />
-  <path d="M4 18l16 0" />
-</svg>
 
-    </i>
-  </button>
-  <div class="absolute md:static top-16 left-0 right-0 z-50 hidden w-full md:block md:w-auto" id="navbar-menu">
-    <ul class="flex flex-col mx-2 md:mx-0 md:flex-row md:border-0 rounded-sm md:rounded-full px-3 text-base font-medium text-slate-800 dark:text-slate-200 shadow-lg bg-white dark:bg-gray-600 shadow-slate-800/5 dark:shadow-slate-200/5 ring-1 ring-slate-900/5 dark:ring-slate-100/5">
-    
-        <li id="post" class="">
-          <a class="block px-3 py-3 hover:text-emerald-600"
-            href="" title="Post">Post</a>
-        </li>
-      
-    
-        <li id="about" class="">
-          <a class="block px-3 py-3 hover:text-emerald-600"
-            href="" title="About">About</a>
-        </li>
-      
-    
-    </ul>
-  </div>
+  
+
+
+
+
+  
+    <a href="/es/post/2024-08-27-enabling-dmarc-on-directadmin/">es-MX 🇲🇽</a>
+  
+
 </nav>
+</header>
+  <main id="main-content">
 
+<h1>Enabling DMarc on Directadmin</h1>
+<p class="byline">
+  <time datetime='2024-08-27' pubdate>
+    2024-08-27
+  </time>
+  · jvergara
+</p>
 
-  </div>
-  
-  <div class="flex-none mx-1"></div>
-  
-  <div class="flex-none md:hidden">
-    <a href=/search/ class="inline-flex items-center p-2 text-sm text-slate-800 dark:text-slate-200 rounded-lg" aria-controls="navbar-menu" aria-expanded="false">
-      <span class="sr-only">Search</span>
-      <i class="w-8 h-8">
-        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-    <path d="M10 10m-7 0a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
-    <path d="M21 21l-6 -6" />
-</svg>
-
-      </i>
-    </a>
-  </div>
-  <div class="darkmode-toggle flex flex-none mr-2 md:mr-0">
-    <label for="darkmode-toggle" class="flex items-center px-3 cursor-pointer rounded-full bg-gray-100 dark:bg-gray-600" title="Toggle dark mode">
-      <input name="darkmode-toggle" id="darkmode-toggle" type="checkbox" class="sr-only peer" aria-label="Toggle dark mode">
-      <div class="group flex flex-row gap-1 justify-center h-8 px-1 rounded-full bg-white dark:bg-gray-700">
-        <i class="h-6 w-6 flex-none rounded-full bg-yellow-400 place-self-center peer-checked:group-[]:invisible">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brightness-down" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-   <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0"></path>
-   <path d="M12 5l0 .01"></path>
-   <path d="M17 7l0 .01"></path>
-   <path d="M19 12l0 .01"></path>
-   <path d="M17 17l0 .01"></path>
-   <path d="M12 19l0 .01"></path>
-   <path d="M7 17l0 .01"></path>
-   <path d="M5 12l0 .01"></path>
-   <path d="M7 7l0 .01"></path>
-</svg>
-
-        </i>
-        <i class="h-6 w-6 flex-none rounded-full place-self-center invisible peer-checked:group-[]:visible">
-          <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-moon-stars" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-   <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"></path>
-   <path d="M17 4a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2"></path>
-   <path d="M19 11h2m-1 -1v2"></path>
-</svg>
-
-        </i>
-      </div>
-    </label>
-  </div>
-</div>
-
-  </header>
-  <main class="flex flex-auto justify-center">
-    
-<div id="progress" class="fixed top-0 left-0 w-full h-1 bg-blue-500"></div>
-<div class="w-full max-w-4xl lg:max-w-5xl">
-  <div class="flex flex-col mt-6 mx-2 md:mx-0 rounded-lg overflow-hidden shadow-md bg-white dark:bg-gray-700">
-    <div>
-      <a href="/post/2024-08-27-enabling-dmarc-on-directadmin/">
-        
-      </a>
-    </div>
-    <div class="flex flex-col gap-y-3 p-6">
-      <h1 class="text-4xl font-semibold text-slate-800 dark:text-slate-100">
-        <a href="/post/2024-08-27-enabling-dmarc-on-directadmin/">Enabling DMarc on Directadmin</a>
-      </h1>
-
-      
-      
-  <ul class="flex flex-row flex-wrap text-slate-500 dark:text-slate-300">
-    
-      
-      <li>
-        <a href="/categories/%5Cdirectadmin%5C/"
-          class="text-sm mr-2 px-2 py-1 rounded border border-emerald-800 bg-emerald-800 text-slate-50">
-          \[Directadmin\]
-        </a>
-      </li>
-      
-    
-    
-      
-      <li>
-        <a href="/tags/%5Cdirectadminlinux%5C/"
-          class="flex flex-row text-sm mr-2 py-1">
-          <i class="h-5 w-5 flex-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-   <path d="M5 9l14 0"></path>
-   <path d="M5 15l14 0"></path>
-   <path d="M11 4l-4 16"></path>
-   <path d="M17 4l-4 16"></path>
-</svg>
-
-          </i>
-          <span class="ml-0">\[Directadmin,linux\]</span>
-        </a>
-      </li>
-      
-    
-  </ul>
-
-
-
-      <div class="flex flex-col gap-y-1 md:flex-row md:gap-y-0 md:gap-x-4 text-slate-500 dark:text-slate-300">
-  
-  
-  <div class="flex flex-row text-base gap-x-1">
-    <i class="h-6 w-6 flex-none">
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-   <path d="M4 7a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2v-12z"></path>
-   <path d="M16 3v4"></path>
-   <path d="M8 3v4"></path>
-   <path d="M4 11h16"></path>
-   <path d="M11 15h1"></path>
-   <path d="M12 15v3"></path>
-</svg>
-
-    </i>
-    <time datetime="2024-08-27T00:00:00&#43;00:00">
-      2024-08-27
-    </time>
-  </div>
-
-  <div class="flex flex-row text-base gap-x-1">
-    <i class="h-6 w-6 flex-none">
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hourglass-high" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-   <path d="M6.5 7h11"></path>
-   <path d="M6 20v-2a6 6 0 1 1 12 0v2a1 1 0 0 1 -1 1h-10a1 1 0 0 1 -1 -1z"></path>
-   <path d="M6 4v2a6 6 0 1 0 12 0v-2a1 1 0 0 0 -1 -1h-10a1 1 0 0 0 -1 1z"></path>
-</svg>
-
-    </i>
-    <span>
-      2 minutes to read
-    </span>
-  </div>
-</div>
-
-      
-
-      
-        
-        <section class="prose prose-slate dark:prose-invert w-full max-w-4xl lg:max-w-5xl mt-6">
-          <h2>Table of Contents</h2>
-          <aside><nav id="TableOfContents"></nav></aside>
-        </section>
-        
-      
-
-      <article class="mt-6 w-full max-w-4xl lg:max-w-5xl prose prose-slate dark:prose-invert prose-quoteless post-content">
-        <p>Adding a DMARC record<br>
+<content>
+  <p>Adding a DMARC record<br>
 DMARC is a system that adds some rules for DKIM and SPF to give remote servers a better idea of what your intention is for messages that fail those 2 systems. It doesn&rsquo;t really do anything other than clarifying the desired actions to be taken by remote servers, but should lower your spam score in some cases. Be sure that your SPF TXT value contains &ldquo;-all&rdquo; (not ~all) and that you have DKIM setup before proceeding.</p>
 <p>To add a DMARC record when using the Evolution skin:</p>
 <p>Navigate to &ldquo;DNS Management&rdquo;<br>
 Click &ldquo;Add Record&rdquo;<br>
 For &ldquo;Record Type&rdquo;, select &ldquo;TXT&rdquo;<br>
 TXT Record Type, select &ldquo;DMARC&rdquo;<br>
-Enter your email into the &ldquo;Aggregate Email (RUA)&rdquo; field: <a href="mailto:spam-reports@domain.com">spam-reports@domain.com</a>
-<br>
+Enter your email into the &ldquo;Aggregate Email (RUA)&rdquo; field: <a href="mailto:spam-reports@domain.com">spam-reports@domain.com</a><br>
 Click &ldquo;Add&rdquo;<br>
 For other skins, like the &ldquo;Enhanced&rdquo; skin, to add a DMARC record, go to your domain&rsquo;s DNS Management interface and add the following TXT record:</p>
+
+
+
+
+
 <pre tabindex="0"><code>_dmarc TXT &#34;v=DMARC1; p=none; sp=none; rua=mailto:spam-reports@domain.com&#34;
-Be sure to include the whole thing in &#34;quotes&#34;.
-</code></pre><p>The email address <a href="mailto:spam-reports@domain.com">spam-reports@domain.com</a>
- will sometimes be sent reported spam messages by larger providers. Not all services will email this address, but it&rsquo;s handy if a client using a large email provider clicks &ldquo;this is spam&rdquo; for a given message because you&rsquo;ll then be sent that message. Upon receipt, you can determine if someone at your domain is spamming or spoofing, or if the recipient incorrectly labeled the message as spam (at which point, you&rsquo;d probably want to remove that recipient from your mail-out since they likely don&rsquo;t want it).</p>
+Be sure to include the whole thing in &#34;quotes&#34;.</code></pre><p>The email address <a href="mailto:spam-reports@domain.com">spam-reports@domain.com</a> will sometimes be sent reported spam messages by larger providers. Not all services will email this address, but it&rsquo;s handy if a client using a large email provider clicks &ldquo;this is spam&rdquo; for a given message because you&rsquo;ll then be sent that message. Upon receipt, you can determine if someone at your domain is spamming or spoofing, or if the recipient incorrectly labeled the message as spam (at which point, you&rsquo;d probably want to remove that recipient from your mail-out since they likely don&rsquo;t want it).</p>
 <p>The rua=mailto:email portion is not mandatory if you don&rsquo;t want to get these emails.</p>
 <p>You can change the values as desired, as per the DMARC specifications.</p>
 <p>Google&rsquo;s DMARC guide can also be useful for constructing your DMARC record.</p>
 <p>How to automate adding a new DMARC for new domains<br>
 If you like the above setup, and you want to automate its addition to all new DNS zones, you can run the following:</p>
+
+
+
+
+
 <pre tabindex="0"><code>cd /usr/local/directadmin/data/templates/custom
 cp ../dns_txt.conf .
-and then add the record you want to the bottom of the custom/dns_txt.conf by running this command:
-</code></pre><p>echo &lsquo;_dmarc=&ldquo;v=DMARC1; p=none; sp=none; rua=mailto:spam-reports@|DOMAIN|&rdquo;&rsquo; &raquo; dns_txt.conf<br>
+and then add the record you want to the bottom of the custom/dns_txt.conf by running this command:</code></pre><p>echo &lsquo;_dmarc=&ldquo;v=DMARC1; p=none; sp=none; rua=mailto:spam-reports@|DOMAIN|&rdquo;&rsquo; &raquo; dns_txt.conf<br>
 Keep in mind that this assumes that you have a &lsquo;spam-reports&rsquo; email account created already.</p>
 
-      </article>
+</content>
+<p>
+  
+    <a class="blog-tags" href="/tags/directadmin/">#directadmin</a>
+  
+    <a class="blog-tags" href="/tags/linux/">#linux</a>
+  
+</p>
 
-      
+
+  <p>
+    <a href='mailto:me@example.com?subject=Reply%20to%20"Enabling%20DMarc%20on%20Directadmin"'>
+      Reply to this post by email ↪
+    </a>
+  </p>
 
 
-
-
-    </div>
-  </div>
-</div>
 
   </main>
-  <footer class="flex flex-none justify-center">
-    <section class="flex flex-col md:flex-row mx-2 md:mx-0 gap-2 md:gap-0 justify-between w-full max-w-4xl lg:max-w-5xl py-6 text-slate-500 dark:text-slate-300">
-  <div class="flex flex-row">
+  <footer><small>
+  jvergara (CC BY 4.0) | Made with <a href="https://github.com/clente/hugo-bearcub">Bear Cub</a>
+</small></footer>
+
     
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-
-
-  </div>
-  <div class="grow"></div>
-  <div class="flex flex-row">
-    <i class="h-6 w-6 flex-none"><svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-   <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
-   <path d="M14 9.75a3.016 3.016 0 0 0 -4.163 .173a2.993 2.993 0 0 0 0 4.154a3.016 3.016 0 0 0 4.163 .173"></path>
-</svg>
-</i> 2023 - 2025 jvergara
-    
-  </div>
-  
-  <div class="flex flex-row">
-    <span class="ml-0 pl-0 md:ml-2 md:pl-2 border-l-0 md:border-l border-slate-300 dark:border-slate-400">
-      Powered by <a href="https://gohugo.io" target="_blank" rel="noopener" class="underline">Hugo</a> <span class="text-red-600">&hearts;</span> <a href="https://github.com/tomowang/hugo-theme-tailwind" target="_blank" rel="noopener" class="underline">Tailwind</a>
-    </span>
-  </div>
-  
-</section>
-
-  </footer>
-  <script src="/main.js"></script>
-
-<div class="hidden top-1 right-1" id="code-copy">
-  <i class="h-6 w-6 block">
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copy" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M7 7m0 2.667a2.667 2.667 0 0 1 2.667 -2.667h8.666a2.667 2.667 0 0 1 2.667 2.667v8.666a2.667 2.667 0 0 1 -2.667 2.667h-8.666a2.667 2.667 0 0 1 -2.667 -2.667z" />
-  <path d="M4.012 16.737a2.005 2.005 0 0 1 -1.012 -1.737v-10c0 -1.1 .9 -2 2 -2h10c.75 0 1.158 .385 1.5 1" />
-</svg>
-
-  </i>
-</div>
-<div class="hidden top-1 right-1" id="code-copy-done">
-  <i class="h-6 w-6 block">
-    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-check" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
-  <path d="M5 12l5 5l10 -10" />
-</svg>
-
-  </i>
-</div><script src="/code-copy.js"></script>
-
-
-
-
-
 </body>
+
 </html>

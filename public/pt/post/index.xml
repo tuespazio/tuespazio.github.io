@@ -1,0 +1,411 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Posts on Jack Note</title>
+    <link>http://localhost:1313/pt/post/</link>
+    <description>Recent content in Posts on Jack Note</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>es-MX</language>
+    <managingEditor>me@example.com (jvergara)</managingEditor>
+    <webMaster>me@example.com (jvergara)</webMaster>
+    <copyright>jvergara (CC BY 4.0)</copyright>
+    <lastBuildDate>Tue, 27 Aug 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/pt/post/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Enabling DKIM with DirectAdmin</title>
+      <link>http://localhost:1313/pt/post/2024-08-27-enabling-dkim-with-directadmin/</link>
+      <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/pt/post/2024-08-27-enabling-dkim-with-directadmin/</guid>
+      <description>&lt;p&gt;DKIM is a means of authentication using cryptographic techniques designed to combat email spoofing. A DKIM-enabled mail server will generate a hash of the email contents that it wants to sign, use its private key to encrypt it, and sign the outbound message with it. Remote servers receiving email from the DKIM-enabled mail server will check that signature against DNS records added to the sending domain’s DNS zone and verify the signature. They do this by retrieving the public key from the domain’s DNS, using it to decrypt the encrypted hash, and then generating their own hash for comparison against the original hash to determine if they are equal (DKIM passes) or not (DKIM fails).&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>DKIM is a means of authentication using cryptographic techniques designed to combat email spoofing. A DKIM-enabled mail server will generate a hash of the email contents that it wants to sign, use its private key to encrypt it, and sign the outbound message with it. Remote servers receiving email from the DKIM-enabled mail server will check that signature against DNS records added to the sending domain’s DNS zone and verify the signature. They do this by retrieving the public key from the domain’s DNS, using it to decrypt the encrypted hash, and then generating their own hash for comparison against the original hash to determine if they are equal (DKIM passes) or not (DKIM fails).</p>
+<p>DirectAdmin gives the server administrator many options to enable DKIM in order to fit their needs, whether they want it enabled globally by default, on a per-domain basis, on a per-user basis, or just provide the option for users to enable it at will.</p>
+<p>Important Considerations<br>
+When enabling DKIM, it is important to understand that the DKIM DNS record is created and added to the local zone files. Thus, if any domains are using eternal DNS, you must copy these records over to the remote DNS zone file for those domains. Once configured on the local mail server for a domain, outgoing messages will be signed, so you’ll want to make sure that a public key exists in any remote zone files for a domain using remote DNS.</p>
+<p>Enabling the Ability For the Users To Choose Whether To Enable DKIM<br>
+To allow the users to choose whether or not to enable DKIM, you must set dkim to the value of 2 in the directadmin.conf and the rewrite Exim’s configuration files and recompile Exim for this. Log into the server via SSH as the root user and issue the following command to do this,</p>
+
+
+
+
+
+<pre tabindex="0"><code>/usr/local/directadmin/directadmin set dkim 2 restart
+cd /usr/local/directadmin/custombuild
+./build update
+./build exim
+./build eximconf
+Now, a user can enable DKIM with a click of a button in the DirectAdmin interface via User Level → E-Mail Accounts → Enable DKIM.</code></pre><p>dkim directadmin<br>
+Enabling DKIM Globablly By Default For All (Future and/or Existing Domains)<br>
+For Future Domains<br>
+If you’d prefer to have a DKIM record created by default upon domain creation, you would need to set to the dkim option in the directadmin.conf to a value of 1. To do this, run the following commands via SSH as the root user,</p>
+
+
+
+
+
+<pre tabindex="0"><code>/usr/local/directadmin/directadmin set dkim 1 restart
+cd /usr/local/directadmin/custombuild
+./build update
+./build exim
+./build eximconf
+Now, all future domains will have a DKIM record created by default.</code></pre><p>For Existing Domains<br>
+Enabling automatic DKIM record creation doesn’t affect existing domains, though. You have a few options for adding DKIM to the old domains once you’ve enabled dkim in the directadmin.conf. You can either do this for each domain one-by-one or for all existing domains at once.</p>
+<p>To enable DKIM for all existing domains after setting dkim to 1 in the directadmin.conf, you can run the following command via SSH as the root user,</p>
+<p>echo &ldquo;action=rewrite&amp;value=dkim&rdquo; &raquo; /usr/local/directadmin/data/task.queue; /usr/local/directadmin/dataskq<br>
+To enable DKIM for only select domains one-by-one, use either the task queue or dkim_create.sh script provided by DirectAdmin (replace DOMAIN.COM with the domain you’d like DKIM enabled for),</p>
+
+
+
+
+
+<pre tabindex="0"><code>cd /usr/local/directadmin/scripts/dkim_create.sh DOMAIN.COM
+Or</code></pre>
+
+
+
+
+<pre tabindex="0"><code>echo &#34;action=rewrite&amp;value=dkim&amp;domain=DOMAIN.COM&amp;dns=yes&#34; &gt;&gt; /usr/local/directadmin/data/task.queue; /usr/local/directadmin/dataskq
+Note: that both commands work the same way with the exception that you can have the DKIM written immediately with the dataskq verses within one minute with the dkim_create.sh script.</code></pre><p>Disabling DKIM on a Per User Basis When Enabled or Permitted Globally<br>
+This feature is designed so that DKIM is either enabled or permitted globally, but you can disable it on a per user basis. This requires either dkim=1 or dkim=2 set in the directadmin.conf. The setting of 1 will enable DKIM automatically for all domains under each user unless you specify otherwise in their user.conf files. The setting of 2 will allow them the ability to enable DKIM themselves unless otherwise specified in their user.conf file.</p>
+<p>Note that setting dkim=0 in the directadmin.conf fully disables DKIM for the entire server and the user.conf files won’t be checked. Thus, if you want DKIM disabled globally by default with the option to enable for certain users/domains only, setting dkim=2 in the directadmin.conf is a better option.</p>
+<p>When you create a user, you will have created them with a default domain. This domain will have DKIM created for the domain by default due to the globally enabled setting and the non-existence of a user.conf until after the account is created (no user.conf to edit and disable dkim). So, the DKIM for the default domain will need to be removed manually if you’d prefer it not have a DKIM record. Here are the steps to first remove the record for the default domain and then disable the automatic DKIM record creation for subsequent domains under that user.</p>
+<p>To remove the records from the default domain, remove the x._domainkey TXT record from /var/named/DOMAIN.TLD.db and then remove the keys,</p>
+<p>rm /etc/virtual/DOMAIN.COM/dkim.public.key<br>
+rm /etc/virtual/DOMAIN.COM/dkim.private.key<br>
+Now, edit the user.conf so that no subsequent domains created under the user have DKIM records enabled by setting dkim=0. The user.conf can be edited via SSH as the root user and the file is located here (where USERNAME represents the username of the user you are editing),</p>
+<p>/usr/local/directadmin/data/users/USERNAME/user.conf<br>
+This allows that particular user’s dkim setting to override the globally enabled dkim setting set in the directadmin.conf and thus prevents any DKIM records from being created for that user’s domains moving forward.</p>
+<p>Restart DirectAdmin after making the changes,</p>
+<p>service directadmin restart<br>
+Disabling DKIM on a Per Domain Basis<br>
+This is essentially the same feature as the per user feature, with the exception that you would edit the domain’s configuration file located in /usr/local/directadmin/data/users/USERNAME/domains/DOMAIN.TLD.conf, instead. You do not need to edit the user’s user.conf file for per domain control.</p>
+<p>If a certain domain uses both a remote DNS and a remote mail server, you may want to disable DKIM for this one domain rather than all domains belonging to the user. This is where this feature is handy.</p>
+<p>Restart DirectAdmin after making changes to the DOMAIN.TLD.conf file,</p>
+<p>service directadmin restart<br>
+Changing the Default Selector<br>
+DirectAdmin uses x as the default selector. To change the selector, you will need to update the directadmin.conf with the desired selector. The following examples change the selector to default,</p>
+<p>/usr/local/directadmin/directadmin set dkim_selector default restart<br>
+CustomBuild 2.0 rev 1824 will automatically swap the selector in the /etc/exim.dkim.conf. You will need to rebuild the Exim configuration like so,</p>
+<p>/usr/local/directadmin/custombuild/build exim_conf<br>
+Confirm the selector was swapped in the /etc/exim.dkim.conf file,</p>
+<p>[root@host ~]# grep -i selector /etc/exim.dkim.conf<br>
+dkim_selector = default<br>
+Now, any newly created DKIM records will use your specified selector. Do note that you will need to remove and recreate the old DKIM records that use the old selector if you want them to use the new selector.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Enabling DMarc on Directadmin</title>
+      <link>http://localhost:1313/pt/post/2024-08-27-enabling-dmarc-on-directadmin/</link>
+      <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/pt/post/2024-08-27-enabling-dmarc-on-directadmin/</guid>
+      <description>&lt;p&gt;Adding a DMARC record&lt;br&gt;&#xA;DMARC is a system that adds some rules for DKIM and SPF to give remote servers a better idea of what your intention is for messages that fail those 2 systems. It doesn&amp;rsquo;t really do anything other than clarifying the desired actions to be taken by remote servers, but should lower your spam score in some cases. Be sure that your SPF TXT value contains &amp;ldquo;-all&amp;rdquo; (not ~all) and that you have DKIM setup before proceeding.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Adding a DMARC record<br>
+DMARC is a system that adds some rules for DKIM and SPF to give remote servers a better idea of what your intention is for messages that fail those 2 systems. It doesn&rsquo;t really do anything other than clarifying the desired actions to be taken by remote servers, but should lower your spam score in some cases. Be sure that your SPF TXT value contains &ldquo;-all&rdquo; (not ~all) and that you have DKIM setup before proceeding.</p>
+<p>To add a DMARC record when using the Evolution skin:</p>
+<p>Navigate to &ldquo;DNS Management&rdquo;<br>
+Click &ldquo;Add Record&rdquo;<br>
+For &ldquo;Record Type&rdquo;, select &ldquo;TXT&rdquo;<br>
+TXT Record Type, select &ldquo;DMARC&rdquo;<br>
+Enter your email into the &ldquo;Aggregate Email (RUA)&rdquo; field: <a href="mailto:spam-reports@domain.com">spam-reports@domain.com</a><br>
+Click &ldquo;Add&rdquo;<br>
+For other skins, like the &ldquo;Enhanced&rdquo; skin, to add a DMARC record, go to your domain&rsquo;s DNS Management interface and add the following TXT record:</p>
+
+
+
+
+
+<pre tabindex="0"><code>_dmarc TXT &#34;v=DMARC1; p=none; sp=none; rua=mailto:spam-reports@domain.com&#34;
+Be sure to include the whole thing in &#34;quotes&#34;.</code></pre><p>The email address <a href="mailto:spam-reports@domain.com">spam-reports@domain.com</a> will sometimes be sent reported spam messages by larger providers. Not all services will email this address, but it&rsquo;s handy if a client using a large email provider clicks &ldquo;this is spam&rdquo; for a given message because you&rsquo;ll then be sent that message. Upon receipt, you can determine if someone at your domain is spamming or spoofing, or if the recipient incorrectly labeled the message as spam (at which point, you&rsquo;d probably want to remove that recipient from your mail-out since they likely don&rsquo;t want it).</p>
+<p>The rua=mailto:email portion is not mandatory if you don&rsquo;t want to get these emails.</p>
+<p>You can change the values as desired, as per the DMARC specifications.</p>
+<p>Google&rsquo;s DMARC guide can also be useful for constructing your DMARC record.</p>
+<p>How to automate adding a new DMARC for new domains<br>
+If you like the above setup, and you want to automate its addition to all new DNS zones, you can run the following:</p>
+
+
+
+
+
+<pre tabindex="0"><code>cd /usr/local/directadmin/data/templates/custom
+cp ../dns_txt.conf .
+and then add the record you want to the bottom of the custom/dns_txt.conf by running this command:</code></pre><p>echo &lsquo;_dmarc=&ldquo;v=DMARC1; p=none; sp=none; rua=mailto:spam-reports@|DOMAIN|&rdquo;&rsquo; &raquo; dns_txt.conf<br>
+Keep in mind that this assumes that you have a &lsquo;spam-reports&rsquo; email account created already.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>How to block access to xmlrpc.php serverwide on Directadmin?</title>
+      <link>http://localhost:1313/pt/post/2024-08-23-how-to-block-access-to-xmlrpc-php-serverwide-on-directadmin/</link>
+      <pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/pt/post/2024-08-23-how-to-block-access-to-xmlrpc-php-serverwide-on-directadmin/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    <item>
+      <title>Remove This server is running DirectAdmin legacy codebase</title>
+      <link>http://localhost:1313/pt/post/2024-08-23-horemove-this-server-is-running-directadmin-legacy-codebase/</link>
+      <pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/pt/post/2024-08-23-horemove-this-server-is-running-directadmin-legacy-codebase/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    <item>
+      <title>Upgrade Raspberry Pi OS from Bullseye to Bookworm</title>
+      <link>http://localhost:1313/pt/post/2024-08-23-upgrade-raspberry-pi-os-from-bullseye-to-bookworm/</link>
+      <pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/pt/post/2024-08-23-upgrade-raspberry-pi-os-from-bullseye-to-bookworm/</guid>
+      <description>&lt;p&gt;From: &lt;a href=&#34;https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8&#34;&gt;https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;WARNING: READ CAREFULLY BEFORE ATTEMPTING&lt;/p&gt;&#xA;&lt;p&gt;Officially, this is not recommended. YMMV (But tested and work)&lt;/p&gt;&#xA;&lt;p&gt;&lt;a href=&#34;https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/&#34;&gt;https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;This mostly works if you are on 64bit. You are on your own if you are on 32bit or mixed 64/32bit&lt;/p&gt;&#xA;&lt;p&gt;Credit to anfractuosity and fgimenezm for figuring out additional details for kernels&lt;/p&gt;&#xA;&lt;h2 id=&#34;make-sure-everything-is-up-to-date&#34;&gt;Make sure everything is up-to-date&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get update &amp;amp;&amp;amp; sudo apt-get dist-upgrade&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;point-to-bookworm-repos-instead&#34;&gt;Point to bookworm repos instead&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo sed -i -e &amp;#39;s/bullseye/bookworm/g&amp;#39; /etc/apt/sources.list&#xA;sudo sed -i -e &amp;#39;s/bullseye/bookworm/g&amp;#39; /etc/apt/sources.list.d/raspi.list&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;contents-of-etcaptsourceslist&#34;&gt;Contents of /etc/apt/sources.list&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware&#xA;deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware&#xA;deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uncomment-deb-src-lines-below-then-apt-get-update-to-enable-apt-get-source&#34;&gt;Uncomment deb-src lines below then &amp;lsquo;apt-get update&amp;rsquo; to enable &amp;lsquo;apt-get source&amp;rsquo;&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#deb-src http://deb.debian.org/debian bookworm main contrib non-free&#xA;#deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free&#xA;#deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;contents-of-etcaptsourceslistdraspilist&#34;&gt;Contents of /etc/apt/sources.list.d/raspi.list&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;deb http://archive.raspberrypi.org/debian/ bookworm main&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;uncomment-line-below-then-apt-get-update-to-enable-apt-get-source&#34;&gt;Uncomment line below then &amp;lsquo;apt-get update&amp;rsquo; to enable &amp;lsquo;apt-get source&amp;rsquo;&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;#deb-src http://archive.raspberrypi.org/debian/ bookworm main&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;do-actual-update&#34;&gt;Do actual update&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt update &amp;amp;&amp;amp; sudo apt -y full-upgrade &amp;amp;&amp;amp; sudo apt -y clean &amp;amp;&amp;amp; sudo apt -y autoremove&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;reboot&#34;&gt;Reboot&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo reboot&lt;/code&gt;&lt;/pre&gt;&lt;h2 id=&#34;remove-old-config-files-after-doing-sanity-checks&#34;&gt;Remove old config files after doing sanity checks&lt;/h2&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt purge ?config-files&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;Switch to the new kernels&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>From: <a href="https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8">https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8</a></p>
+<p>WARNING: READ CAREFULLY BEFORE ATTEMPTING</p>
+<p>Officially, this is not recommended. YMMV (But tested and work)</p>
+<p><a href="https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/">https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/</a></p>
+<p>This mostly works if you are on 64bit. You are on your own if you are on 32bit or mixed 64/32bit</p>
+<p>Credit to anfractuosity and fgimenezm for figuring out additional details for kernels</p>
+<h2 id="make-sure-everything-is-up-to-date">Make sure everything is up-to-date</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get update &amp;&amp; sudo apt-get dist-upgrade</code></pre><h2 id="point-to-bookworm-repos-instead">Point to bookworm repos instead</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list
+sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list.d/raspi.list</code></pre><h2 id="contents-of-etcaptsourceslist">Contents of /etc/apt/sources.list</h2>
+
+
+
+
+
+<pre tabindex="0"><code>deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware</code></pre><h2 id="uncomment-deb-src-lines-below-then-apt-get-update-to-enable-apt-get-source">Uncomment deb-src lines below then &lsquo;apt-get update&rsquo; to enable &lsquo;apt-get source&rsquo;</h2>
+
+
+
+
+
+<pre tabindex="0"><code>#deb-src http://deb.debian.org/debian bookworm main contrib non-free
+#deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free
+#deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free</code></pre><h2 id="contents-of-etcaptsourceslistdraspilist">Contents of /etc/apt/sources.list.d/raspi.list</h2>
+
+
+
+
+
+<pre tabindex="0"><code>deb http://archive.raspberrypi.org/debian/ bookworm main</code></pre><h2 id="uncomment-line-below-then-apt-get-update-to-enable-apt-get-source">Uncomment line below then &lsquo;apt-get update&rsquo; to enable &lsquo;apt-get source&rsquo;</h2>
+
+
+
+
+
+<pre tabindex="0"><code>#deb-src http://archive.raspberrypi.org/debian/ bookworm main</code></pre><h2 id="do-actual-update">Do actual update</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt update &amp;&amp; sudo apt -y full-upgrade &amp;&amp; sudo apt -y clean &amp;&amp; sudo apt -y autoremove</code></pre><h2 id="reboot">Reboot</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo reboot</code></pre><h2 id="remove-old-config-files-after-doing-sanity-checks">Remove old config files after doing sanity checks</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt purge ?config-files</code></pre><p>Switch to the new kernels</p>
+<p>WARNING: Since this has bitten several folks. The following can completely brick your system requiring a reinstall</p>
+<p>DO NOT do this if you are unsure</p>
+<h2 id="prep">Prep</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo dpkg --purge --force-depends raspberrypi-kernel raspberrypi-bootloader
+sudo umount /boot
+sudo fsck -y /boot
+sudo mkdir /boot/firmware
+sudo sed -i.bak -e &#34;s#boot#boot/firmware#&#34; /etc/fstab
+sudo systemctl daemon-reload
+sudo mount /boot/firmware
+sudo apt install raspi-firmware</code></pre><h2 id="actually-install-the-kernels-make-sure-you-pick-the-right-version-for-your-pi">Actually install the kernels. Make sure you pick the right version for your Pi</h2>
+
+
+
+
+
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-ruby" data-lang="ruby"><span class="line"><span class="ln">1</span><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v8</span> <span class="n">linux</span><span class="o">-</span><span class="n">headers</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v8</span> <span class="c1"># 64bit</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v7l</span> <span class="n">linux</span><span class="o">-</span><span class="n">headers</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v7l</span> <span class="c1"># 32bit</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="n">sudo</span> <span class="n">apt</span> <span class="n">install</span> <span class="n">linux</span><span class="o">-</span><span class="n">image</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v6</span> <span class="n">linux</span><span class="o">-</span><span class="n">headers</span><span class="o">-</span><span class="n">rpi</span><span class="o">-</span><span class="n">v6</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="no">Append</span> <span class="n">auto_initramfs</span><span class="o">=</span><span class="mi">1</span> <span class="n">to</span> <span class="n">the</span> <span class="n">bottom</span> <span class="n">of</span> <span class="n">file</span> <span class="n">where</span> <span class="n">it</span> <span class="n">says</span> <span class="o">[</span><span class="n">all</span><span class="o">]</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="n">sudo</span> <span class="n">sed</span> <span class="o">-</span><span class="n">i</span><span class="o">.</span><span class="n">bak</span> <span class="s1">&#39;$ a\auto_initramfs=1&#39;</span> <span class="sr">/boot/</span><span class="n">firmware</span><span class="o">/</span><span class="n">config</span><span class="o">.</span><span class="n">txt</span></span></span></code></pre></div><h2 id="reboot-1">Reboot</h2>
+<p>sudo reboot</p>
+
+
+
+
+
+<pre tabindex="0"><code>Verify using &#34;uname -a&#34; (correct as of 10/2023)</code></pre><h1 id="old-kernel">Old kernel</h1>
+
+
+
+
+
+<pre tabindex="0"><code>Linux raspberrypi 6.1.21-v8+ #1642 SMP PREEMPT Mon Apr 3 17:24:16 BST 2023 aarch64 GNU/Linux</code></pre><h1 id="new-kernel">New kernel</h1>
+
+
+
+
+
+<pre tabindex="0"><code>Linux raspberrypi 6.1.0-rpi4-rpi-v8 #1 SMP PREEMPT Debian 1:6.1.54-1+rpt2 (2023-10-05) aarch64 GNU/Linux</code></pre><p>If you are not converted to using NetworkManager, you might lose networking upon reboot.</p>
+<p>Check the ARP table to see what the new DHCP assigned IP address is. You may have to manually set the IP address again</p>
+<p>Thanks to solsticedhiver for identifying this</p>
+<h2 id="install-networkmanager-if-not-already-installed">Install NetworkManager if not already installed</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install --no-install-recommends network-manager
+#</code></pre><h2 id="switch-to-networkmanager-from-dhcpcd">Switch to NetworkManager from dhcpcd</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo systemctl enable --now NetworkManager
+sudo systemctl disable --now dhcpcd
+#</code></pre><h2 id="set-up-static-ip-adjust-as-necessary">Set up static IP. Adjust as necessary</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo nmcli -p connection show
+sudo nmcli -p connection show &#34;Wired connection 1&#34;
+sudo nmcli con mod &#34;Wired connection 1&#34; ipv4.method manual ipv4.addresses 192.168.1.5/24 ipv4.gateway 192.168.1.1</code></pre><h2 id="reboot-2">Reboot</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo reboot</code></pre><h2 id="bonus-steps">Bonus steps</h2>
+<h2 id="install-btop">Install btop</h2>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install btop</code></pre><h2 id="update-etcsshsshd_config-for-up-to-date-secure-by-default-config-use-ssh-audit-to-verify">Update /etc/ssh/sshd_config for up to date, secure by default config. Use ssh-audit to verify</h2>
+
+
+
+
+
+<pre tabindex="0"><code>KexAlgorithms sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org
+HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-ed25519</code></pre><h2 id="ciphers-chacha20-poly1305opensshcom--disabled-due-to-cve-2023-48795-for-now">Ciphers <a href="mailto:chacha20-poly1305@openssh.com">chacha20-poly1305@openssh.com</a> # Disabled due to CVE-2023-48795 for now</h2>
+
+
+
+
+
+<pre tabindex="0"><code>Ciphers aes128-gcm@openssh.com,aes256-gcm@openssh.com
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com</code></pre>]]></content:encoded>
+    </item>
+    <item>
+      <title>Airprint RaspberryPi OS</title>
+      <link>http://localhost:1313/pt/post/2024-08-22-airprint-raspberrypi-os/</link>
+      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/pt/post/2024-08-22-airprint-raspberrypi-os/</guid>
+      <description>&lt;p&gt;Para habilitar AirPrint en CUPS (Common UNIX Printing System), sigue estos pasos:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Asegúrate de que CUPS esté instalado y funcionando en tu sistema.&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Instala Avahi, que es necesario para el descubrimiento de servicios:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install avahi-daemon&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Instala los paquetes necesarios para AirPrint:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo apt-get install cups-filters&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;Edita el archivo de configuración de CUPS:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;sudo nano /etc/cups/cupsd.conf&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;En el archivo, busca la sección &amp;ldquo;Browsing&amp;rdquo; y asegúrate de que tenga estas líneas:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;Browsing On&#xA;BrowseLocalProtocols dnssd&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;En la misma sección, agrega o modifica estas líneas:&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Para habilitar AirPrint en CUPS (Common UNIX Printing System), sigue estos pasos:</p>
+<ol>
+<li>
+<p>Asegúrate de que CUPS esté instalado y funcionando en tu sistema.</p>
+</li>
+<li>
+<p>Instala Avahi, que es necesario para el descubrimiento de servicios:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install avahi-daemon</code></pre></li>
+<li>
+<p>Instala los paquetes necesarios para AirPrint:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo apt-get install cups-filters</code></pre></li>
+<li>
+<p>Edita el archivo de configuración de CUPS:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo nano /etc/cups/cupsd.conf</code></pre></li>
+<li>
+<p>En el archivo, busca la sección &ldquo;Browsing&rdquo; y asegúrate de que tenga estas líneas:</p>
+
+
+
+
+
+<pre tabindex="0"><code>Browsing On
+BrowseLocalProtocols dnssd</code></pre></li>
+<li>
+<p>En la misma sección, agrega o modifica estas líneas:</p>
+
+
+
+
+
+<pre tabindex="0"><code>ServerAlias *</code></pre></li>
+<li>
+<p>Guarda los cambios y cierra el editor.</p>
+</li>
+<li>
+<p>Reinicia el servicio CUPS:</p>
+
+
+
+
+
+<pre tabindex="0"><code>sudo systemctl restart cups</code></pre></li>
+<li>
+<p>Asegúrate de que tu impresora esté configurada correctamente en CUPS.</p>
+</li>
+<li>
+<p>Verifica que tu dispositivo iOS y tu servidor CUPS estén en la misma red.</p>
+</li>
+</ol>
+<p>Después de seguir estos pasos, tus impresoras configuradas en CUPS deberían ser detectables por dispositivos iOS a través de AirPrint.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Enable Quotas AlmaLinux 9 Directadmin</title>
+      <link>http://localhost:1313/pt/post/2024-08-22-my-new-post/</link>
+      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/pt/post/2024-08-22-my-new-post/</guid>
+      <description>&lt;p&gt;Please try running this command:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;grubby --args=&amp;#34;rootflags=uquota,pquota&amp;#34; --update-kernel=ALL&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then reboot your server.&#xA;After that check if the XFS quota is OK.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<p>Please try running this command:</p>
+
+
+
+
+
+<pre tabindex="0"><code>grubby --args=&#34;rootflags=uquota,pquota&#34; --update-kernel=ALL</code></pre><p>and then reboot your server.
+After that check if the XFS quota is OK.</p>
+]]></content:encoded>
+    </item>
+  </channel>
+</rss>

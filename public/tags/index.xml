@@ -1,64 +1,79 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Tags on </title>
+    <title>Tags on Jack Notes</title>
     <link>http://localhost:1313/tags/</link>
-    <description>Recent content in Tags on </description>
-    <generator>Hugo</generator>
-    <language>en</language>
-    <managingEditor>user@example.com (Hugo Author)</managingEditor>
-    <webMaster>user@example.com (Hugo Author)</webMaster>
-    <copyright>jvergara</copyright>
+    <description>Recent content in Tags on Jack Notes</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-US</language>
+    <managingEditor>me@example.com (jvergara)</managingEditor>
+    <webMaster>me@example.com (jvergara)</webMaster>
+    <copyright>jvergara (CC BY 4.0)</copyright>
     <lastBuildDate>Tue, 27 Aug 2024 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>\[Directadmin,linux\]</title>
-      <link>http://localhost:1313/tags/%5Cdirectadminlinux%5C/</link>
-      <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate><author>user@example.com (Hugo Author)</author>
-      <guid>http://localhost:1313/tags/%5Cdirectadminlinux%5C/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>\[Upgrade,linux,bookworm,bullseye\]</title>
-      <link>http://localhost:1313/tags/%5Cupgradelinuxbookwormbullseye%5C/</link>
-      <pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>user@example.com (Hugo Author)</author>
-      <guid>http://localhost:1313/tags/%5Cupgradelinuxbookwormbullseye%5C/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Airprint</title>
-      <link>http://localhost:1313/tags/airprint/</link>
-      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>user@example.com (Hugo Author)</author>
-      <guid>http://localhost:1313/tags/airprint/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Cups</title>
-      <link>http://localhost:1313/tags/cups/</link>
-      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>user@example.com (Hugo Author)</author>
-      <guid>http://localhost:1313/tags/cups/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Directadmin</title>
       <link>http://localhost:1313/tags/directadmin/</link>
-      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>user@example.com (Hugo Author)</author>
+      <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
       <guid>http://localhost:1313/tags/directadmin/</guid>
       <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
     </item>
     <item>
       <title>Linux</title>
       <link>http://localhost:1313/tags/linux/</link>
-      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>user@example.com (Hugo Author)</author>
+      <pubDate>Tue, 27 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
       <guid>http://localhost:1313/tags/linux/</guid>
       <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    <item>
+      <title>Bookworm</title>
+      <link>http://localhost:1313/tags/bookworm/</link>
+      <pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/tags/bookworm/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    <item>
+      <title>Bullseye</title>
+      <link>http://localhost:1313/tags/bullseye/</link>
+      <pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/tags/bullseye/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    <item>
+      <title>Upgrade</title>
+      <link>http://localhost:1313/tags/upgrade/</link>
+      <pubDate>Fri, 23 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/tags/upgrade/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    <item>
+      <title>Airprint</title>
+      <link>http://localhost:1313/tags/airprint/</link>
+      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/tags/airprint/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
+    </item>
+    <item>
+      <title>Cups</title>
+      <link>http://localhost:1313/tags/cups/</link>
+      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
+      <guid>http://localhost:1313/tags/cups/</guid>
+      <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
     </item>
     <item>
       <title>Quotas</title>
       <link>http://localhost:1313/tags/quotas/</link>
-      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>user@example.com (Hugo Author)</author>
+      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
       <guid>http://localhost:1313/tags/quotas/</guid>
       <description></description>
+      <content:encoded><![CDATA[]]></content:encoded>
     </item>
   </channel>
 </rss>
