@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr">
+<html lang="en" dir="ltr">
 <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
-  <title>\[Upgrade,linux,bookworm,bullseye\] :: Jack Notes - Example site for hugo-theme-tailwind</title>
+  <title>\[Upgrade,linux,bookworm,bullseye\] ::  - Example site for hugo-theme-tailwind</title>
   
   <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -14,9 +14,8 @@
   content="hugo, tailwind, tailwindcss, hugo theme, hugo theme tailwind"
 />
 <meta name="robots" content="noodp" /><link rel="manifest" href="/manifest.json" /><meta property="og:url" content="http://localhost:1313/tags/%5Cupgradelinuxbookwormbullseye%5C/">
-  <meta property="og:site_name" content="Jack Notes">
   <meta property="og:title" content="\[Upgrade,linux,bookworm,bullseye\]">
-  <meta property="og:locale" content="en_us">
+  <meta property="og:locale" content="en">
   <meta property="og:type" content="website">
 
 
@@ -54,7 +53,7 @@
     <div class="flex flex-row gap justify-between w-full max-w-4xl lg:max-w-5xl h-12 mt-3">
   <div class="flex-none ml-2 md:ml-0">
     <a href="/" class="">
-      <img class="h-12 w-12 rounded-full object-cover bg-gray-100" src="https://placehold.co/512/webp" alt="logo">
+      <img class="h-12 w-12 rounded-full object-cover bg-gray-100" src="/logo.webp" alt="logo">
     </a>
   </div>
   <div class="flex-1"></div>
@@ -62,6 +61,38 @@
     
 
 
+
+<nav class="h-full static">
+  <button id="navbar-menu-toggle" type="button" class="inline-flex items-center p-2 text-sm text-slate-800 dark:text-slate-200 rounded-lg md:hidden" aria-controls="navbar-menu" aria-expanded="false">
+    <span class="sr-only">Open main menu</span>
+    <i class="w-8 h-8">
+      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-menu-2" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 6l16 0" />
+  <path d="M4 12l16 0" />
+  <path d="M4 18l16 0" />
+</svg>
+
+    </i>
+  </button>
+  <div class="absolute md:static top-16 left-0 right-0 z-50 hidden w-full md:block md:w-auto" id="navbar-menu">
+    <ul class="flex flex-col mx-2 md:mx-0 md:flex-row md:border-0 rounded-sm md:rounded-full px-3 text-base font-medium text-slate-800 dark:text-slate-200 shadow-lg bg-white dark:bg-gray-600 shadow-slate-800/5 dark:shadow-slate-200/5 ring-1 ring-slate-900/5 dark:ring-slate-100/5">
+    
+        <li id="post" class="">
+          <a class="block px-3 py-3 hover:text-emerald-600"
+            href="" title="Post">Post</a>
+        </li>
+      
+    
+        <li id="about" class="">
+          <a class="block px-3 py-3 hover:text-emerald-600"
+            href="" title="About">About</a>
+        </li>
+      
+    
+    </ul>
+  </div>
+</nav>
 
 
   </div>
@@ -144,8 +175,38 @@
               
   
   <div class="my-4 text-large text-slate-600 dark:text-slate-300">
-    <!-- raw HTML omitted -->
-
+    <p>From: <a href="https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8" target="_blank" rel="noopener">https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8</a>
+</p>
+<p>WARNING: READ CAREFULLY BEFORE ATTEMPTING</p>
+<p>Officially, this is not recommended. YMMV (But tested and work)</p>
+<p><a href="https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/" target="_blank" rel="noopener">https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/</a>
+</p>
+<p>This mostly works if you are on 64bit. You are on your own if you are on 32bit or mixed 64/32bit</p>
+<p>Credit to anfractuosity and fgimenezm for figuring out additional details for kernels</p>
+<h2 id="make-sure-everything-is-up-to-date">Make sure everything is up-to-date</h2>
+<pre tabindex="0"><code>sudo apt-get update &amp;&amp; sudo apt-get dist-upgrade
+</code></pre><h2 id="point-to-bookworm-repos-instead">Point to bookworm repos instead</h2>
+<pre tabindex="0"><code>sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list
+sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list.d/raspi.list
+</code></pre><h2 id="contents-of-etcaptsourceslist">Contents of /etc/apt/sources.list</h2>
+<pre tabindex="0"><code>deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware
+</code></pre><h2 id="uncomment-deb-src-lines-below-then-apt-get-update-to-enable-apt-get-source">Uncomment deb-src lines below then &lsquo;apt-get update&rsquo; to enable &lsquo;apt-get source&rsquo;</h2>
+<pre tabindex="0"><code>#deb-src http://deb.debian.org/debian bookworm main contrib non-free
+#deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free
+#deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free
+</code></pre><h2 id="contents-of-etcaptsourceslistdraspilist">Contents of /etc/apt/sources.list.d/raspi.list</h2>
+<pre tabindex="0"><code>deb http://archive.raspberrypi.org/debian/ bookworm main
+</code></pre><h2 id="uncomment-line-below-then-apt-get-update-to-enable-apt-get-source">Uncomment line below then &lsquo;apt-get update&rsquo; to enable &lsquo;apt-get source&rsquo;</h2>
+<pre tabindex="0"><code>#deb-src http://archive.raspberrypi.org/debian/ bookworm main
+</code></pre><h2 id="do-actual-update">Do actual update</h2>
+<pre tabindex="0"><code>sudo apt update &amp;&amp; sudo apt -y full-upgrade &amp;&amp; sudo apt -y clean &amp;&amp; sudo apt -y autoremove
+</code></pre><h2 id="reboot">Reboot</h2>
+<pre tabindex="0"><code>sudo reboot
+</code></pre><h2 id="remove-old-config-files-after-doing-sanity-checks">Remove old config files after doing sanity checks</h2>
+<pre tabindex="0"><code>sudo apt purge ?config-files
+</code></pre><p>Switch to the new kernels</p>
   </div>
   
 
@@ -313,6 +374,8 @@
 
   
 
+  
+
 <section class="flex flex-col w-full gap-y-3 pl-6 py-3 mt-6 text-slate-800 dark:text-slate-200">
   <div class="flex flex-row">
     <a class="flex flex-row" href='/tags/'>
@@ -422,7 +485,7 @@
    <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0"></path>
    <path d="M14 9.75a3.016 3.016 0 0 0 -4.163 .173a2.993 2.993 0 0 0 0 4.154a3.016 3.016 0 0 0 4.163 .173"></path>
 </svg>
-</i> 2023 - 2025 
+</i> 2023 - 2025 jvergara
     
   </div>
   
