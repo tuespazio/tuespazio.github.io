@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Upgrade Raspberry Pi OS from Bullseye to Bookworm | My New Hugo Site</title>
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="description" content="From: https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8
+WARNING: READ CAREFULLY BEFORE ATTEMPTING
+Officially, this is not recommended. YMMV (But tested and work)
+https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/
+This mostly works if you are on 64bit. You are on your own if you are on 32bit or mixed 64/32bit
+Credit to anfractuosity and fgimenezm for figuring out additional details for kernels
+Make sure everything is up-to-date
+sudo apt-get update &amp;&amp; sudo apt-get dist-upgrade
+Point to bookworm repos instead
+sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list
+sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list.d/raspi.list
+Contents of /etc/apt/sources.list
+deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware
+Uncomment deb-src lines below then &lsquo;apt-get update&rsquo; to enable &lsquo;apt-get source&rsquo;
+#deb-src http://deb.debian.org/debian bookworm main contrib non-free
+#deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free
+#deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free
+Contents of /etc/apt/sources.list.d/raspi.list
+deb http://archive.raspberrypi.org/debian/ bookworm main
+Uncomment line below then &lsquo;apt-get update&rsquo; to enable &lsquo;apt-get source&rsquo;
+#deb-src http://archive.raspberrypi.org/debian/ bookworm main
+Do actual update
+sudo apt update &amp;&amp; sudo apt -y full-upgrade &amp;&amp; sudo apt -y clean &amp;&amp; sudo apt -y autoremove
+Reboot
+sudo reboot
+Remove old config files after doing sanity checks
+sudo apt purge ?config-files
+Switch to the new kernels">
+    <meta name="generator" content="Hugo 0.143.0">
+    
+    
+    
+      <meta name="robots" content="noindex, nofollow">
+    
+    
+
+    
+<link rel="stylesheet" href="/ananke/css/main.min.css" >
+
+
+
+
+    
+
+    
+      
+
+    
+
+    
+
+    
+      <link rel="canonical" href="http://localhost:1313/post/2024-08-23-upgrade-raspberry-pi-os-from-bullseye-to-bookworm/">
+    
+
+    <meta property="og:url" content="http://localhost:1313/post/2024-08-23-upgrade-raspberry-pi-os-from-bullseye-to-bookworm/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="Upgrade Raspberry Pi OS from Bullseye to Bookworm">
+  <meta property="og:description" content="From: https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8
+WARNING: READ CAREFULLY BEFORE ATTEMPTING
+Officially, this is not recommended. YMMV (But tested and work)
+https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/
+This mostly works if you are on 64bit. You are on your own if you are on 32bit or mixed 64/32bit
+Credit to anfractuosity and fgimenezm for figuring out additional details for kernels
+Make sure everything is up-to-date sudo apt-get update &amp;&amp; sudo apt-get dist-upgrade Point to bookworm repos instead sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list.d/raspi.list Contents of /etc/apt/sources.list deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware Uncomment deb-src lines below then ‘apt-get update’ to enable ‘apt-get source’ #deb-src http://deb.debian.org/debian bookworm main contrib non-free #deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free #deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free Contents of /etc/apt/sources.list.d/raspi.list deb http://archive.raspberrypi.org/debian/ bookworm main Uncomment line below then ‘apt-get update’ to enable ‘apt-get source’ #deb-src http://archive.raspberrypi.org/debian/ bookworm main Do actual update sudo apt update &amp;&amp; sudo apt -y full-upgrade &amp;&amp; sudo apt -y clean &amp;&amp; sudo apt -y autoremove Reboot sudo reboot Remove old config files after doing sanity checks sudo apt purge ?config-files Switch to the new kernels">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="post">
+    <meta property="article:published_time" content="2024-08-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-08-23T00:00:00+00:00">
+    <meta property="article:tag" content="\[Upgrade,linux,bookworm,bullseye\]">
+
+  <meta itemprop="name" content="Upgrade Raspberry Pi OS from Bullseye to Bookworm">
+  <meta itemprop="description" content="From: https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8
+WARNING: READ CAREFULLY BEFORE ATTEMPTING
+Officially, this is not recommended. YMMV (But tested and work)
+https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/
+This mostly works if you are on 64bit. You are on your own if you are on 32bit or mixed 64/32bit
+Credit to anfractuosity and fgimenezm for figuring out additional details for kernels
+Make sure everything is up-to-date sudo apt-get update &amp;&amp; sudo apt-get dist-upgrade Point to bookworm repos instead sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list.d/raspi.list Contents of /etc/apt/sources.list deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware Uncomment deb-src lines below then ‘apt-get update’ to enable ‘apt-get source’ #deb-src http://deb.debian.org/debian bookworm main contrib non-free #deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free #deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free Contents of /etc/apt/sources.list.d/raspi.list deb http://archive.raspberrypi.org/debian/ bookworm main Uncomment line below then ‘apt-get update’ to enable ‘apt-get source’ #deb-src http://archive.raspberrypi.org/debian/ bookworm main Do actual update sudo apt update &amp;&amp; sudo apt -y full-upgrade &amp;&amp; sudo apt -y clean &amp;&amp; sudo apt -y autoremove Reboot sudo reboot Remove old config files after doing sanity checks sudo apt purge ?config-files Switch to the new kernels">
+  <meta itemprop="datePublished" content="2024-08-23T00:00:00+00:00">
+  <meta itemprop="dateModified" content="2024-08-23T00:00:00+00:00">
+  <meta itemprop="wordCount" content="490">
+  <meta itemprop="keywords" content="\[Upgrade,linux,bookworm,bullseye\]">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Upgrade Raspberry Pi OS from Bullseye to Bookworm">
+  <meta name="twitter:description" content="From: https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8
+WARNING: READ CAREFULLY BEFORE ATTEMPTING
+Officially, this is not recommended. YMMV (But tested and work)
+https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/
+This mostly works if you are on 64bit. You are on your own if you are on 32bit or mixed 64/32bit
+Credit to anfractuosity and fgimenezm for figuring out additional details for kernels
+Make sure everything is up-to-date sudo apt-get update &amp;&amp; sudo apt-get dist-upgrade Point to bookworm repos instead sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list.d/raspi.list Contents of /etc/apt/sources.list deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware Uncomment deb-src lines below then ‘apt-get update’ to enable ‘apt-get source’ #deb-src http://deb.debian.org/debian bookworm main contrib non-free #deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free #deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free Contents of /etc/apt/sources.list.d/raspi.list deb http://archive.raspberrypi.org/debian/ bookworm main Uncomment line below then ‘apt-get update’ to enable ‘apt-get source’ #deb-src http://archive.raspberrypi.org/debian/ bookworm main Do actual update sudo apt update &amp;&amp; sudo apt -y full-upgrade &amp;&amp; sudo apt -y clean &amp;&amp; sudo apt -y autoremove Reboot sudo reboot Remove old config files after doing sanity checks sudo apt purge ?config-files Switch to the new kernels">
+
+	
+  </head><body class="ma0 avenir bg-near-white development">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-black">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="/" class="f3 fw2 hover-white no-underline white-90 dib">
+      
+        My New Hugo Site
+      
+    </a>
+    <div class="flex-l items-center">
+      
+
+      
+      <div class="ananke-socials"></div>
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3">
+    <header class="mt4 w-100">
+      <aside class="instapaper_ignoref b helvetica tracked ttu">
+          
+        Posts
+      </aside><div id="sharing" class="mt3 ananke-socials"></div>
+<h1 class="f1 athelas mt3 mb1">Upgrade Raspberry Pi OS from Bullseye to Bookworm</h1>
+      
+      
+      
+      <time class="f6 mv4 dib tracked" datetime="2024-08-23T00:00:00Z">August 23, 2024</time>
+      
+
+      
+      
+    </header>
+    <div class="nested-copy-line-height lh-copy serif f4 nested-links mid-gray pr4-l w-two-thirds-l"><p>From: <a href="https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8">https://gist.github.com/jauderho/6b7d42030e264a135450ecc0ba521bd8</a></p>
+<p>WARNING: READ CAREFULLY BEFORE ATTEMPTING</p>
+<p>Officially, this is not recommended. YMMV (But tested and work)</p>
+<p><a href="https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/">https://www.raspberrypi.com/news/bookworm-the-new-version-of-raspberry-pi-os/</a></p>
+<p>This mostly works if you are on 64bit. You are on your own if you are on 32bit or mixed 64/32bit</p>
+<p>Credit to anfractuosity and fgimenezm for figuring out additional details for kernels</p>
+<h2 id="make-sure-everything-is-up-to-date">Make sure everything is up-to-date</h2>
+<pre tabindex="0"><code>sudo apt-get update &amp;&amp; sudo apt-get dist-upgrade
+</code></pre><h2 id="point-to-bookworm-repos-instead">Point to bookworm repos instead</h2>
+<pre tabindex="0"><code>sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list
+sudo sed -i -e &#39;s/bullseye/bookworm/g&#39; /etc/apt/sources.list.d/raspi.list
+</code></pre><h2 id="contents-of-etcaptsourceslist">Contents of /etc/apt/sources.list</h2>
+<pre tabindex="0"><code>deb http://deb.debian.org/debian bookworm main contrib non-free non-free-firmware
+deb http://security.debian.org/debian-security bookworm-security main contrib non-free non-free-firmware
+deb http://deb.debian.org/debian bookworm-updates main contrib non-free non-free-firmware
+</code></pre><h2 id="uncomment-deb-src-lines-below-then-apt-get-update-to-enable-apt-get-source">Uncomment deb-src lines below then &lsquo;apt-get update&rsquo; to enable &lsquo;apt-get source&rsquo;</h2>
+<pre tabindex="0"><code>#deb-src http://deb.debian.org/debian bookworm main contrib non-free
+#deb-src http://security.debian.org/debian-security bookworm-security main contrib non-free
+#deb-src http://deb.debian.org/debian bookworm-updates main contrib non-free
+</code></pre><h2 id="contents-of-etcaptsourceslistdraspilist">Contents of /etc/apt/sources.list.d/raspi.list</h2>
+<pre tabindex="0"><code>deb http://archive.raspberrypi.org/debian/ bookworm main
+</code></pre><h2 id="uncomment-line-below-then-apt-get-update-to-enable-apt-get-source">Uncomment line below then &lsquo;apt-get update&rsquo; to enable &lsquo;apt-get source&rsquo;</h2>
+<pre tabindex="0"><code>#deb-src http://archive.raspberrypi.org/debian/ bookworm main
+</code></pre><h2 id="do-actual-update">Do actual update</h2>
+<pre tabindex="0"><code>sudo apt update &amp;&amp; sudo apt -y full-upgrade &amp;&amp; sudo apt -y clean &amp;&amp; sudo apt -y autoremove
+</code></pre><h2 id="reboot">Reboot</h2>
+<pre tabindex="0"><code>sudo reboot
+</code></pre><h2 id="remove-old-config-files-after-doing-sanity-checks">Remove old config files after doing sanity checks</h2>
+<pre tabindex="0"><code>sudo apt purge ?config-files
+</code></pre><p>Switch to the new kernels</p>
+<p>WARNING: Since this has bitten several folks. The following can completely brick your system requiring a reinstall</p>
+<p>DO NOT do this if you are unsure</p>
+<h2 id="prep">Prep</h2>
+<pre tabindex="0"><code>sudo dpkg --purge --force-depends raspberrypi-kernel raspberrypi-bootloader
+sudo umount /boot
+sudo fsck -y /boot
+sudo mkdir /boot/firmware
+sudo sed -i.bak -e &#34;s#boot#boot/firmware#&#34; /etc/fstab
+sudo systemctl daemon-reload
+sudo mount /boot/firmware
+sudo apt install raspi-firmware
+</code></pre><h2 id="actually-install-the-kernels-make-sure-you-pick-the-right-version-for-your-pi">Actually install the kernels. Make sure you pick the right version for your Pi</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ruby" data-lang="ruby"><span style="display:flex;"><span>sudo apt install linux<span style="color:#f92672">-</span>image<span style="color:#f92672">-</span>rpi<span style="color:#f92672">-</span>v8 linux<span style="color:#f92672">-</span>headers<span style="color:#f92672">-</span>rpi<span style="color:#f92672">-</span>v8 <span style="color:#75715e"># 64bit</span>
+</span></span><span style="display:flex;"><span>sudo apt install linux<span style="color:#f92672">-</span>image<span style="color:#f92672">-</span>rpi<span style="color:#f92672">-</span>v7l linux<span style="color:#f92672">-</span>headers<span style="color:#f92672">-</span>rpi<span style="color:#f92672">-</span>v7l <span style="color:#75715e"># 32bit</span>
+</span></span><span style="display:flex;"><span>sudo apt install linux<span style="color:#f92672">-</span>image<span style="color:#f92672">-</span>rpi<span style="color:#f92672">-</span>v6 linux<span style="color:#f92672">-</span>headers<span style="color:#f92672">-</span>rpi<span style="color:#f92672">-</span>v6
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">Append</span> auto_initramfs<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> to the bottom of file where it says <span style="color:#f92672">[</span>all<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>sudo sed <span style="color:#f92672">-</span>i<span style="color:#f92672">.</span>bak <span style="color:#e6db74">&#39;$ a\auto_initramfs=1&#39;</span> <span style="color:#e6db74">/boot/</span>firmware<span style="color:#f92672">/</span>config<span style="color:#f92672">.</span>txt
+</span></span></code></pre></div><h2 id="reboot-1">Reboot</h2>
+<p>sudo reboot</p>
+<pre tabindex="0"><code>Verify using &#34;uname -a&#34; (correct as of 10/2023)
+</code></pre><h1 id="old-kernel">Old kernel</h1>
+<pre tabindex="0"><code>Linux raspberrypi 6.1.21-v8+ #1642 SMP PREEMPT Mon Apr 3 17:24:16 BST 2023 aarch64 GNU/Linux
+</code></pre><h1 id="new-kernel">New kernel</h1>
+<pre tabindex="0"><code>Linux raspberrypi 6.1.0-rpi4-rpi-v8 #1 SMP PREEMPT Debian 1:6.1.54-1+rpt2 (2023-10-05) aarch64 GNU/Linux
+</code></pre><p>If you are not converted to using NetworkManager, you might lose networking upon reboot.</p>
+<p>Check the ARP table to see what the new DHCP assigned IP address is. You may have to manually set the IP address again</p>
+<p>Thanks to solsticedhiver for identifying this</p>
+<h2 id="install-networkmanager-if-not-already-installed">Install NetworkManager if not already installed</h2>
+<pre tabindex="0"><code>sudo apt-get install --no-install-recommends network-manager
+#
+</code></pre><h2 id="switch-to-networkmanager-from-dhcpcd">Switch to NetworkManager from dhcpcd</h2>
+<pre tabindex="0"><code>sudo systemctl enable --now NetworkManager
+sudo systemctl disable --now dhcpcd
+#
+</code></pre><h2 id="set-up-static-ip-adjust-as-necessary">Set up static IP. Adjust as necessary</h2>
+<pre tabindex="0"><code>sudo nmcli -p connection show
+sudo nmcli -p connection show &#34;Wired connection 1&#34;
+sudo nmcli con mod &#34;Wired connection 1&#34; ipv4.method manual ipv4.addresses 192.168.1.5/24 ipv4.gateway 192.168.1.1
+</code></pre><h2 id="reboot-2">Reboot</h2>
+<pre tabindex="0"><code>sudo reboot
+</code></pre><h2 id="bonus-steps">Bonus steps</h2>
+<h2 id="install-btop">Install btop</h2>
+<pre tabindex="0"><code>sudo apt-get install btop
+</code></pre><h2 id="update-etcsshsshd_config-for-up-to-date-secure-by-default-config-use-ssh-audit-to-verify">Update /etc/ssh/sshd_config for up to date, secure by default config. Use ssh-audit to verify</h2>
+<pre tabindex="0"><code>KexAlgorithms sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org
+HostKeyAlgorithms ssh-ed25519-cert-v01@openssh.com,ssh-ed25519
+</code></pre><h2 id="ciphers-chacha20-poly1305opensshcom--disabled-due-to-cve-2023-48795-for-now">Ciphers <a href="mailto:chacha20-poly1305@openssh.com">chacha20-poly1305@openssh.com</a> # Disabled due to CVE-2023-48795 for now</h2>
+<pre tabindex="0"><code>Ciphers aes128-gcm@openssh.com,aes256-gcm@openssh.com
+MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
+</code></pre><ul class="pa0">
+  
+   <li class="list di">
+     <a href="/tags/%5Cupgradelinuxbookwormbullseye%5C/" class="link f5 grow no-underline br-pill ba ph3 pv2 mb2 dib black sans-serif">\[Upgrade,linux,bookworm,bullseye\]</a>
+   </li>
+  
+</ul>
+<div class="mt6 instapaper_ignoref">
+      
+      
+      </div>
+    </div>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-black bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://localhost:1313/" >
+    &copy;  My New Hugo Site 2025 
+  </a>
+    <div><div class="ananke-socials"></div>
+</div>
+  </div>
+</footer>
+
+  </body>
+</html>

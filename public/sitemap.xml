@@ -3,43 +3,72 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>http://localhost:1313/tags/%5Cdirectadminlinux%5C/</loc>
+    <lastmod>2024-08-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/categories/%5Clinux-raspberrypi%5C/</loc>
-  </url><url>
-    <loc>http://localhost:1313/tags/%5Cupgradelinuxbookwormbullseye%5C/</loc>
-  </url><url>
-    <loc>http://localhost:1313/tags/airprint/</loc>
-  </url><url>
-    <loc>http://localhost:1313/posts/2024-08-22-airprint-raspberrypi-os/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/almalinux/</loc>
+    <loc>http://localhost:1313/categories/%5Cdirectadmin%5C/</loc>
+    <lastmod>2024-08-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
+    <lastmod>2024-08-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/cups/</loc>
+    <loc>http://localhost:1313/post/2024-08-27-enabling-dkim-with-directadmin/</loc>
+    <lastmod>2024-08-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/directadmin/</loc>
-  </url><url>
-    <loc>http://localhost:1313/posts/2024-08-22-my-new-post/</loc>
-  </url><url>
-    <loc>http://localhost:1313/posts/2024-08-27-enabling-dkim-with-directadmin/</loc>
-  </url><url>
-    <loc>http://localhost:1313/posts/2024-08-27-enabling-dmarc-on-directadmin/</loc>
-  </url><url>
-    <loc>http://localhost:1313/tags/linux/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/linux/</loc>
+    <loc>http://localhost:1313/post/2024-08-27-enabling-dmarc-on-directadmin/</loc>
+    <lastmod>2024-08-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/</loc>
+    <lastmod>2024-08-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-  </url><url>
-    <loc>http://localhost:1313/tags/quotas/</loc>
-  </url><url>
-    <loc>http://localhost:1313/categories/raspberrypi/</loc>
+    <loc>http://localhost:1313/post/</loc>
+    <lastmod>2024-08-27T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2024-08-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/posts/2024-08-23-upgrade-raspberry-pi-os-from-bullseye-to-bookworm/</loc>
+    <loc>http://localhost:1313/categories/%5Clinux-raspberrypi%5C/</loc>
+    <lastmod>2024-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/%5Cupgradelinuxbookwormbullseye%5C/</loc>
+    <lastmod>2024-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/post/2024-08-23-how-to-block-access-to-xmlrpc-php-serverwide-on-directadmin/</loc>
+    <lastmod>2024-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/post/2024-08-23-horemove-this-server-is-running-directadmin-legacy-codebase/</loc>
+    <lastmod>2024-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/post/2024-08-23-upgrade-raspberry-pi-os-from-bullseye-to-bookworm/</loc>
+    <lastmod>2024-08-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/airprint/</loc>
+    <lastmod>2024-08-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/post/2024-08-22-airprint-raspberrypi-os/</loc>
+    <lastmod>2024-08-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/almalinux/</loc>
+    <lastmod>2024-08-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/cups/</loc>
+    <lastmod>2024-08-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/directadmin/</loc>
+    <lastmod>2024-08-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/post/2024-08-22-my-new-post/</loc>
+    <lastmod>2024-08-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/linux/</loc>
+    <lastmod>2024-08-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/linux/</loc>
+    <lastmod>2024-08-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/quotas/</loc>
+    <lastmod>2024-08-22T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/categories/raspberrypi/</loc>
+    <lastmod>2024-08-22T00:00:00+00:00</lastmod>
   </url>
 </urlset>
