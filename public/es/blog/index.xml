@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Blog on Jack Note</title>
+    <title>Blog on Jacks Note</title>
     <link>http://localhost:1313/es/blog/</link>
-    <description>Recent content in Blog on Jack Note</description>
+    <description>Recent content in Blog on Jacks Note</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>es-MX</language>
     <managingEditor>me@example.com (jvergara)</managingEditor>

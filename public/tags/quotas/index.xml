@@ -1,47 +1,21 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss
+  version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:wfw="http://wellformedweb.org/CommentAPI/">
   <channel>
-    <title>Quotas on Jack Notes</title>
+    <title>Quotas on </title>
     <link>http://localhost:1313/tags/quotas/</link>
-    <description>Recent content in Quotas on Jack Notes</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-US</language>
-    <managingEditor>me@example.com (jvergara)</managingEditor>
-    <webMaster>me@example.com (jvergara)</webMaster>
+    <description>Recent content in Quotas on </description>
+    <generator>Hugo</generator>
+    <language>en</language>
     <copyright>jvergara (CC BY 4.0)</copyright>
-    <lastBuildDate>Thu, 22 Aug 2024 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:1313/tags/quotas/index.xml" rel="self" type="application/rss+xml" />
-    <item>
+    <lastBuildDate>Thu, 22 Aug 2024 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/quotas/index.xml" rel="self" type="application/rss+xml" /><item>
       <title>Enable Quotas AlmaLinux 9 Directadmin</title>
       <link>http://localhost:1313/blog/2024-08-22-my-new-post/</link>
-      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
-      <guid>http://localhost:1313/blog/2024-08-22-my-new-post/</guid>
-      <description>&lt;p&gt;Please try running this command:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;grubby --args=&amp;#34;rootflags=uquota,pquota&amp;#34; --update-kernel=ALL&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then reboot your server.&#xA;After that check if the XFS quota is OK.&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>Please try running this command:</p>
-
-
-
-
-
-<pre tabindex="0"><code>grubby --args=&#34;rootflags=uquota,pquota&#34; --update-kernel=ALL</code></pre><p>and then reboot your server.
-After that check if the XFS quota is OK.</p>
-]]></content:encoded>
-    </item>
-    <item>
+      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><guid>http://localhost:1313/blog/2024-08-22-my-new-post/</guid>
+      <description>&lt;p&gt;Please try running this command:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;grubby --args=&amp;#34;rootflags=uquota,pquota&amp;#34; --update-kernel=ALL&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then reboot your server.&#xA;After that check if the XFS quota is OK.&lt;/p&gt;</description></item><item>
       <title>Enable Quotas AlmaLinux 9 Directadmin</title>
-      <link>http://localhost:1313/post/2024-08-22-my-new-post/</link>
-      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><author>me@example.com (jvergara)</author>
-      <guid>http://localhost:1313/post/2024-08-22-my-new-post/</guid>
-      <description>&lt;p&gt;Please try running this command:&lt;/p&gt;&#xA;&#xA;&#xA;&#xA;&#xA;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;grubby --args=&amp;#34;rootflags=uquota,pquota&amp;#34; --update-kernel=ALL&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then reboot your server.&#xA;After that check if the XFS quota is OK.&lt;/p&gt;</description>
-      <content:encoded><![CDATA[<p>Please try running this command:</p>
-
-
-
-
-
-<pre tabindex="0"><code>grubby --args=&#34;rootflags=uquota,pquota&#34; --update-kernel=ALL</code></pre><p>and then reboot your server.
-After that check if the XFS quota is OK.</p>
-]]></content:encoded>
-    </item>
-  </channel>
+      <link>http://localhost:1313/posts/2024-08-22-my-new-post/</link>
+      <pubDate>Thu, 22 Aug 2024 00:00:00 +0000</pubDate><guid>http://localhost:1313/posts/2024-08-22-my-new-post/</guid>
+      <description>&lt;p&gt;Please try running this command:&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;grubby --args=&amp;#34;rootflags=uquota,pquota&amp;#34; --update-kernel=ALL&#xA;&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;and then reboot your server.&#xA;After that check if the XFS quota is OK.&lt;/p&gt;</description></item></channel>
 </rss>

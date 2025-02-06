@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss
+  version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:wfw="http://wellformedweb.org/CommentAPI/">
+  <channel>
+    <title>Test on </title>
+    <link>http://localhost:1313/tags/test/</link>
+    <description>Recent content in Test on </description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <copyright>jvergara (CC BY 4.0)</copyright>
+    <lastBuildDate>Sun, 01 Sep 2024 00:00:00 +0800</lastBuildDate><atom:link href="http://localhost:1313/tags/test/index.xml" rel="self" type="application/rss+xml" /><item>
+      <title>CJK Unicode Test</title>
+      <link>http://localhost:1313/posts/cjk-test/</link>
+      <pubDate>Sun, 01 Sep 2024 00:00:00 +0800</pubDate><guid>http://localhost:1313/posts/cjk-test/</guid>
+      <description>&lt;p&gt;The following is part of the CJK text, this page is for test use only.&lt;/p&gt;</description></item></channel>
+</rss>

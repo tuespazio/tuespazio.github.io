@@ -28,19 +28,6 @@
                 href="http://localhost:1313/es/blog/"
                 />
   </url><url>
-    <loc>http://localhost:1313/es/post/</loc>
-    <lastmod>2024-08-27T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en-US"
-                href="http://localhost:1313/post/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="es-MX"
-                href="http://localhost:1313/es/post/"
-                />
-  </url><url>
     <loc>http://localhost:1313/es/categories/</loc>
     <lastmod>2024-08-27T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -143,6 +130,19 @@
                 rel="alternate"
                 hreflang="es-MX"
                 href="http://localhost:1313/es/tags/linux/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/es/post/</loc>
+    <lastmod>2024-08-27T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en-US"
+                href="http://localhost:1313/post/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="es-MX"
+                href="http://localhost:1313/es/post/"
                 />
   </url><url>
     <loc>http://localhost:1313/es/tags/</loc>
